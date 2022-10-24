@@ -1,0 +1,13 @@
+1.	Il sistema deve, all’avvio dell’applicazione, 
+	controllare le scadenze dei prodotti e notificare tramite una finestra gli alimenti prossimi alla scadenza.
+
+
+2.	Il sistema deve Cercare una ricetta che viene proposta all’utente tramite un’apposita finestra.
+
+
+3.	Il sistema deve eseguire un check sulle quantità presenti all’interno della dispensa e segnalare,
+	tramite una finestra dedicata, i prodotti che richiedono un ordine dal fornitore. 
+
+
+4.	Il sistema deve ordinare i ristoratori in base ad un filtro (specificato dall’ utente fornitore) 
+	determinato come segue: tipo prodotto, quantità e prezzo proposto.

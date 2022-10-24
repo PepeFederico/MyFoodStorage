@@ -1,0 +1,22 @@
+Come utente domestico, 
+Vorrei una rappresentazione virtuale della mia dispensa,
+In modo da verificare in qualsiasi momento le disponibilità e scadenze dei prodotti alimentari correnti. 
+
+
+
+Come utente domestico,
+Voglio preparare una pietanza partendo da una ricetta, 
+Così che possa controllare se ho a disposizione tutti gl’ingredienti necessari nelle giuste quantità.
+
+
+
+Come utente ristoratore,
+Voglio ordinare gli alimenti di cui ho bisogno, 
+Così che possa garantire alla clientela tutte le proposte del menù.
+
+
+
+
+Come utente fornitore,
+Voglio proporre contratti di fornitura ai ristoratori, 
+Così che possa vendere i prodotti al miglior offerente.
