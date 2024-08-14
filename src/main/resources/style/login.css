@@ -4,11 +4,8 @@
 
 .login_logo_container{
     -fx-alignment: center;
-}
-
-.login_logo_container Text{
     -fx-font-size: 25px;
-    -fx-fill: #FFFFFF;
+    -fx-text-fill: #FFFFFF;
     -fx-font-weight: bold;
 }
 
