@@ -12,12 +12,23 @@ public class UserFactory {
         }
         return userFactory;
     }
-    public Utente getUtente(String tipoUtente, String email, String password, String nome, String cognome, String partitaIVA, String viaAttivita, int numeroCivico, String citta, String CAP, String nomeAttivita, String numeroTelefono){
+    public Utente getUtente(String tipoUtente,
+                            String email,
+                            String password,
+                            String nome,
+                            String cognome,
+                            String partitaIva,
+                            String viaAttivita,
+                            int numeroCivico,
+                            String citta,
+                            String cap,
+                            String nomeAttivita,
+                            String numeroTelefono){
         return switch (tipoUtente) {
             case "Ristoratore" ->
-                    new Ristoratore(email, password, nome, cognome, partitaIVA, viaAttivita, numeroCivico, citta, CAP, nomeAttivita, numeroTelefono);
+                    new Ristoratore(email, password, nome, cognome, partitaIva, viaAttivita, numeroCivico, citta, cap, nomeAttivita, numeroTelefono);
             case "Fornitore" ->
-                    new Fornitore(email, password, nome, cognome, partitaIVA, viaAttivita, numeroCivico, citta, CAP, nomeAttivita, numeroTelefono);
+                    new Fornitore(email, password, nome, cognome, partitaIva, viaAttivita, numeroCivico, citta, cap, nomeAttivita, numeroTelefono);
             default -> null;
         };
     }
