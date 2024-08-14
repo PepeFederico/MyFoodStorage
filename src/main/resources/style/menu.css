@@ -8,9 +8,6 @@
     -fx-background-color: #62A4FB;
     -fx-alignment: top_center;
     -fx-padding: 10;
-}
-
-.conteiner_titolo Text{
     -fx-fill: #FFFFFF;
     -fx-font-size: 25px;
 }
