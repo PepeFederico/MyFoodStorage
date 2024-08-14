@@ -2,6 +2,8 @@ package com.myfoodstorage.pepefederico.progettoispw_2024.controller.grafico;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import com.myfoodstorage.pepefederico.progettoispw_2024.model.Model;
 import javafx.fxml.FXML;
 import com.myfoodstorage.pepefederico.progettoispw_2024.controller.applicativo.LoginControllerA;
@@ -23,6 +25,8 @@ public class LoginController implements Initializable {
     private Button loginButton;
     @FXML
     private PasswordField passwordInputField;
+    private static final String ACTION = "Context error";
+    private final Logger logger = Logger.getLogger(LoginController.class.getName());
 
     @FXML
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -47,7 +51,7 @@ public class LoginController implements Initializable {
                     errorLabel.setVisible(true);
                     errorLabel.setText(e.getMessage());
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    logger.log(Level.SEVERE, ACTION, e);
                 }
             }else{
                 errorLabel.setVisible(true);

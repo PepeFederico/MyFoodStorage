@@ -17,17 +17,21 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ProdottiController implements Initializable {
-        @FXML
-        private GridPane gridPane;
-        @FXML
-        private Button nuovoProdotto;
-        @FXML
-        private ScrollPane scrollPane;
-        @FXML
-        private Button backView;
-        private ArrayList<ProdottoBean> prodotto;
+    @FXML
+    private GridPane gridPane;
+    @FXML
+    private Button nuovoProdotto;
+    @FXML
+    private ScrollPane scrollPane;
+    @FXML
+    private Button backView;
+    private static final String ACTION = "Context error";
+    private final Logger logger = Logger.getLogger(ProdottiController.class.getName());
+    private ArrayList<ProdottoBean> prodotto;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -68,7 +72,7 @@ public class ProdottiController implements Initializable {
                 GridPane.setMargin(anchorPane, new Insets(10));
             }
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            logger.log(Level.SEVERE, ACTION, e);
         }
     }
 

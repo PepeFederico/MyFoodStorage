@@ -10,33 +10,14 @@ import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Properties;
 
 public class UtenteDao {
-    Connection connection;
-    Utente utenteLoggato;
+    private Utente utenteLoggato;
 
     public void verificaCredenziali(String email, String password) throws Exception{
-        connection = ConnectionFactory.getConnection();
-        ResultSet rs;
-
-        try(InputStream input = new FileInputStream("risorseDB/queryDatabase.properties")){
-            Properties properties = new Properties();
-            properties.load(input);
-
-            PreparedStatement query = connection.prepareStatement(properties.getProperty("QUERY_LOGIN"));
-            query.setString(1,email);
-            query.setString(2,password);
-            rs = query.executeQuery();
-
-        }catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        if(!rs.next()){
-            throw new UserNotFoundException("Errore: Credenziali non valide");
-        }
-
+        ResultSet rs = getResultSet(email, password);
         utenteLoggato = UserFactory.getInstance().getUtente(
                 rs.getString("tipoUtente"),
                 rs.getString("email"),
@@ -51,6 +32,29 @@ public class UtenteDao {
                 rs.getString("nomeAttivita"),
                 rs.getString("telefono")
         );
+    }
+
+    private static ResultSet getResultSet(String email, String password) throws SQLException, UserNotFoundException {
+        Connection connection = ConnectionFactory.getConnection();
+        ResultSet rs;
+
+        try(InputStream input = new FileInputStream("risorseDB/queryDatabase.properties")){
+            Properties properties = new Properties();
+            properties.load(input);
+
+            PreparedStatement query = connection.prepareStatement(properties.getProperty("QUERY_LOGIN"));
+            query.setString(1, email);
+            query.setString(2, password);
+            rs = query.executeQuery();
+
+        }catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        if(!rs.next()){
+            throw new UserNotFoundException("Errore: Credenziali non valide");
+        }
+        return rs;
     }
 
     public Utente getUtenteLoggato() {

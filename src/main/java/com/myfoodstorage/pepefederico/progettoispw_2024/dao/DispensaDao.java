@@ -15,12 +15,10 @@ import com.myfoodstorage.pepefederico.progettoispw_2024.factory.DispensaFactory;
 import com.myfoodstorage.pepefederico.progettoispw_2024.model.Dispensa;
 
 public class DispensaDao {
-    Connection connection;
-    ArrayList<Dispensa> dispensa = new ArrayList<>();
-    DispensaFactory dispensaFactory;
+    private final ArrayList<Dispensa> dispensa = new ArrayList<>();
 
     public void recuperoDispensa(String nomeAttivita) throws Exception {
-        connection = ConnectionFactory.getConnection();
+        Connection connection = ConnectionFactory.getConnection();
         ResultSet rs;
 
         try(
@@ -39,7 +37,7 @@ public class DispensaDao {
 
         if(rs.next()){
             do{
-                dispensa.add(dispensaFactory.getInstance().getDispensa(rs.getString("Dispensa"), nomeAttivita, rs.getInt("numeroBoxCategorie")));
+                dispensa.add(DispensaFactory.getInstance().getDispensa(rs.getString("Dispensa"), nomeAttivita, rs.getInt("numeroBoxCategorie")));
             }while (rs.next());
         }else{
             throw new FoodStorageNotFoundException("Ops, come è vuota la tua dispensa. Prova ad inserire una nuova dispensa!");

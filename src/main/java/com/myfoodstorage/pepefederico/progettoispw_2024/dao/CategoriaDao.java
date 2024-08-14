@@ -15,12 +15,10 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 public class CategoriaDao {
-    Connection connection;
-    ArrayList<Categoria> categoria = new ArrayList<>();
-    CategoriaFactory categoriaFactory;
+    private final ArrayList<Categoria> categoria = new ArrayList<>();
 
     public void recuperoCategorie(String nomeAttivita, String nomeDispensa) throws Exception{
-        connection = ConnectionFactory.getConnection();
+        Connection connection = ConnectionFactory.getConnection();
         ResultSet rs;
 
         try(InputStream input = new FileInputStream("risorseDB/queryDatabase.properties")){
@@ -37,7 +35,7 @@ public class CategoriaDao {
 
         if(rs.next()){
             do{
-                categoria.add(categoriaFactory.getInstance().getCategoria(rs.getString("nomeCategoria"), nomeAttivita, nomeDispensa));
+                categoria.add(CategoriaFactory.getInstance().getCategoria(rs.getString("nomeCategoria"), nomeAttivita, nomeDispensa));
             }while(rs.next());
         }else{
             throw new CategoryNotFoundException("La dispensa non presenta alcuna Categoria di Prodotti. Aggiungi una categoria");

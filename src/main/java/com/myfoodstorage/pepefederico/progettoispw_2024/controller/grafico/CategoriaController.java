@@ -18,6 +18,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class CategoriaController implements Initializable {
     @FXML
@@ -28,6 +30,8 @@ public class CategoriaController implements Initializable {
     private ScrollPane scrollPane;
     @FXML
     private Button backView;
+    private static final String ACTION = "Context error";
+    private final Logger logger = Logger.getLogger(CategoriaController.class.getName());
     private ArrayList<CategoriaBean> categoria;
 
 
@@ -70,7 +74,7 @@ public class CategoriaController implements Initializable {
                 GridPane.setMargin(anchorPane, new Insets(10));
             }
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            logger.log(Level.SEVERE, ACTION, e);
         }
     }
 

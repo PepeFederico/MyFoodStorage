@@ -15,12 +15,16 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class DashboardController implements Initializable {
     @FXML
     private GridPane gridPane;
     @FXML
     private ScrollPane scrollPane;
+    private static final String ACTION = "Context error";
+    private final Logger logger = Logger.getLogger(DashboardController.class.getName());
     private ArrayList<DispensaBean> dispensa;
 
     @Override
@@ -60,7 +64,7 @@ public class DashboardController implements Initializable {
                 GridPane.setMargin(anchorPane, new Insets(10));
             }
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            logger.log(Level.SEVERE, ACTION, e);
         }
     }
 }

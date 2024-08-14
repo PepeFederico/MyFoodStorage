@@ -13,8 +13,12 @@ import com.myfoodstorage.pepefederico.progettoispw_2024.exceptions.ProductNotFou
 import com.myfoodstorage.pepefederico.progettoispw_2024.model.*;
 import com.myfoodstorage.pepefederico.progettoispw_2024.dao.DispensaDao;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class GestioneProdottiA {
+    private static final String ACTION = "Context error";
+    private final Logger logger = Logger.getLogger(GestioneProdottiA.class.getName());
     private final SessioneBean sessioneBean;
     private DispensaBean dispensaBean;
     private CategoriaBean categoriaBean;
@@ -48,7 +52,7 @@ public class GestioneProdottiA {
             throw new FoodStorageNotFoundException("Ops, come è vuota la tua dispensa. Prova ad inserire una nuova dispensa!");
         }
         catch (Exception e) {
-            throw new RuntimeException(e);
+            logger.log(Level.SEVERE, ACTION, e);
         }
     }
 
@@ -65,7 +69,7 @@ public class GestioneProdottiA {
         }catch (CategoryNotFoundException e){
             throw new CategoryNotFoundException("La dispensa non presenta alcuna Categoria di Prodotti. Aggiungi una categoria");
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            logger.log(Level.SEVERE, ACTION, e);
         }
     }
 
@@ -90,7 +94,7 @@ public class GestioneProdottiA {
         }catch (ProductNotFoundException e){
             throw new ProductNotFoundException("Ops, come è vuota la tua dispensa. Inserisci qualche prodotto");
         }catch (Exception e) {
-            throw new RuntimeException(e);
+            logger.log(Level.SEVERE, ACTION, e);
         }
     }
 

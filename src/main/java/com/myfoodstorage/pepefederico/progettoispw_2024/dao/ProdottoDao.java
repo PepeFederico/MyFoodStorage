@@ -16,31 +16,14 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 public class ProdottoDao {
-    Connection connection;
-    ProdottoFactory prodottoFactory;
-    ArrayList<Prodotto> prodotti = new ArrayList<>();
+    private final ArrayList<Prodotto> prodotti = new ArrayList<>();
 
     public void recuperoProdotti(String nomeAttivita, String nomeCategoria, String nomeDispensa) throws Exception {
-        connection = ConnectionFactory.getConnection();
-        ResultSet rs;
-
-        try(InputStream input = new FileInputStream("risorseDB/queryDatabase.properties")){
-            Properties properties = new Properties();
-            properties.load(input);
-
-            PreparedStatement query = connection.prepareStatement(properties.getProperty("QUERY_PRODOTTI"));
-            query.setString(1,nomeAttivita);
-            query.setString(2,nomeDispensa);
-            query.setString(3,nomeCategoria);
-            rs = query.executeQuery();
-
-        }catch (IOException | SQLException e) {
-            throw new RuntimeException(e);
-        }
+        ResultSet rs = getResultSet(nomeAttivita, nomeCategoria, nomeDispensa);
         if(rs.next()){
             do{
                 try {
-                    prodotti.add(prodottoFactory.getInstance().getProdotto(
+                    prodotti.add(ProdottoFactory.getInstance().getProdotto(
                                     rs.getString("nome"),
                                     rs.getString("numLotto"),
                                     rs.getDate("scadenza"),
@@ -57,6 +40,26 @@ public class ProdottoDao {
         }else{
             throw new ProductNotFoundException("Ops, come è vuota la tua dispensa. Inserisci qualche prodotto");
         }
+    }
+
+    private static ResultSet getResultSet(String nomeAttivita, String nomeCategoria, String nomeDispensa) {
+        Connection connection = ConnectionFactory.getConnection();
+        ResultSet rs;
+
+        try(InputStream input = new FileInputStream("risorseDB/queryDatabase.properties")){
+            Properties properties = new Properties();
+            properties.load(input);
+
+            PreparedStatement query = connection.prepareStatement(properties.getProperty("QUERY_PRODOTTI"));
+            query.setString(1, nomeAttivita);
+            query.setString(2, nomeDispensa);
+            query.setString(3, nomeCategoria);
+            rs = query.executeQuery();
+
+        }catch (IOException | SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return rs;
     }
 
     public ArrayList<Prodotto> getProdotti() {
