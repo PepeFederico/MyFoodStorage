@@ -7,7 +7,7 @@ public class Dispensa {
     private String nomeDispensa;
     private int numeroCategorie;
     private ArrayList<Categoria> categorie;
-    private CategoriaDao categoriaDAO;
+    private final CategoriaDao categoriaDAO;
 
     public Dispensa(String nomeDispensa, int numeroCategorie) {
         this.nomeDispensa = nomeDispensa;

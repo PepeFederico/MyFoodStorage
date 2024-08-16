@@ -17,11 +17,11 @@ public class ConnectionFactory {
             Properties properties = new Properties();
             properties.load(input);
 
-            String connection_url   = properties.getProperty("CONNECTION_URL");
+            String connectionUrl   = properties.getProperty("CONNECTION_URL");
             String user             = properties.getProperty("LOGIN_USER");
             String password         = properties.getProperty("LOGIN_PASS");
 
-            connection = DriverManager.getConnection(connection_url,user,password);
+            connection = DriverManager.getConnection(connectionUrl,user,password);
         } catch (IOException | SQLException e) {
             throw new RuntimeException(e);
         }

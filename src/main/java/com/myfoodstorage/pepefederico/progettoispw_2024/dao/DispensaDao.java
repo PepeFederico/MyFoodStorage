@@ -37,7 +37,7 @@ public class DispensaDao {
 
         if(rs.next()){
             do{
-                dispensa.add(DispensaFactory.getInstance().getDispensa(rs.getString("Dispensa"), nomeAttivita, rs.getInt("numeroBoxCategorie")));
+                dispensa.add(DispensaFactory.getInstance().getDispensa(rs.getString("Dispensa"), rs.getInt("numeroBoxCategorie")));
             }while (rs.next());
         }else{
             throw new FoodStorageNotFoundException("Ops, come è vuota la tua dispensa. Prova ad inserire una nuova dispensa!");

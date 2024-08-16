@@ -15,8 +15,7 @@ public class DispensaFactory {
         return dispensaFactory;
     }
 
-    public Dispensa getDispensa(String nomeDispensa, String nomeAttivita, int numeroCategorie) throws Exception {
-        Dispensa dispensa = new Dispensa(nomeDispensa, numeroCategorie);
-        return dispensa;
+    public Dispensa getDispensa(String nomeDispensa, int numeroCategorie) {
+        return new Dispensa(nomeDispensa, numeroCategorie);
     }
 }
