@@ -5,12 +5,10 @@ import com.myfoodstorage.pepefederico.progettoispw_2024.factory.CategoriaFactory
 import com.myfoodstorage.pepefederico.progettoispw_2024.model.Categoria;
 import com.myfoodstorage.pepefederico.progettoispw_2024.exceptions.CategoryNotFoundException;
 import java.io.FileInputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
@@ -38,8 +36,6 @@ public class CategoriaDao {
                 throw new CategoryNotFoundException("La dispensa non presenta alcuna Categoria di Prodotti. Aggiungi una categoria");
             }
 
-        } catch (IOException | SQLException e) {
-            throw new RuntimeException(e);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

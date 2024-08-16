@@ -1,6 +1,9 @@
 package com.myfoodstorage.pepefederico.progettoispw_2024.model;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.time.LocalDateTime;
-import java.util.Random;
+import java.util.Properties;
 
 public class Sessione {
     private int idSessione;
@@ -9,7 +12,7 @@ public class Sessione {
     private Utente utente;
 
     public Sessione(Utente utente) {
-        this.idSessione = new Random().nextInt(3000);
+        this.idSessione = generaNumeroCasuale();
         this.data = LocalDateTime.now();
         this.utente = utente;
         this.statusSessione = true;
@@ -38,5 +41,15 @@ public class Sessione {
     }
     public boolean isStatusSessione() {
         return statusSessione;
+    }
+
+    private int generaNumeroCasuale(){
+        try(InputStream input = new FileInputStream("boundNumeroCasuale/boundNumRandom.properties")){
+            Properties properties = new Properties();
+            properties.load(input);
+            return Integer.parseInt(properties.getProperty("BOUND"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
