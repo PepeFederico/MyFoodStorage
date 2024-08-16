@@ -18,11 +18,11 @@ import java.util.Properties;
 public class ProdottoDao {
     private final ArrayList<Prodotto> prodotti = new ArrayList<>();
 
-    public void recuperoProdotti(String nomeAttivita, String nomeCategoria, String nomeDispensa) throws Exception {
+    public void recuperoProdotti(String nomeAttivita, String nomeCategoria, String nomeDispensa) throws ProductNotFoundException {
         ResultSet rs = getResultSet(nomeAttivita, nomeCategoria, nomeDispensa);
-        if(rs.next()){
-            do{
-                try {
+        try {
+            if(rs.next()){
+                do{
                     prodotti.add(ProdottoFactory.getInstance().getProdotto(
                                     rs.getString("nome"),
                                     rs.getString("numLotto"),
@@ -30,15 +30,13 @@ public class ProdottoDao {
                                     rs.getInt("taglia"),
                                     rs.getInt("numeroScorte"),
                                     rs.getDouble("costo"),
-                                    TipoAnimale.valueOf(rs.getString("TipoAnimale"))
-                            )
-                    );
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
-            }while(rs.next());
-        }else{
-            throw new ProductNotFoundException("Ops, come è vuota la tua dispensa. Inserisci qualche prodotto");
+                                    TipoAnimale.valueOf(rs.getString("TipoAnimale"))));
+                }while(rs.next());
+            }else{
+                throw new ProductNotFoundException("Ops, come è vuota la tua dispensa. Inserisci qualche prodotto");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 

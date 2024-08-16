@@ -16,22 +16,26 @@ import java.util.Properties;
 public class UtenteDao {
     private Utente utenteLoggato;
 
-    public void verificaCredenziali(String email, String password) throws Exception{
-        ResultSet rs = getResultSet(email, password);
-        utenteLoggato = UserFactory.getInstance().getUtente(
-                rs.getString("tipoUtente"),
-                rs.getString("email"),
-                rs.getString("pass"),
-                rs.getString("nome"),
-                rs.getString("cognome"),
-                rs.getString("partitaIva"),
-                rs.getString("via"),
-                Integer.parseInt(rs.getString("numeroCivico")),
-                rs.getString("citta"),
-                rs.getString("cap"),
-                rs.getString("nomeAttivita"),
-                rs.getString("telefono")
-        );
+    public void verificaCredenziali(String email, String password) throws UserNotFoundException{
+        try {
+            ResultSet rs = getResultSet(email, password);
+            utenteLoggato = UserFactory.getInstance().getUtente(
+                    rs.getString("tipoUtente"),
+                    rs.getString("email"),
+                    rs.getString("pass"),
+                    rs.getString("nome"),
+                    rs.getString("cognome"),
+                    rs.getString("partitaIva"),
+                    rs.getString("via"),
+                    Integer.parseInt(rs.getString("numeroCivico")),
+                    rs.getString("citta"),
+                    rs.getString("cap"),
+                    rs.getString("nomeAttivita"),
+                    rs.getString("telefono")
+            );
+        }catch(SQLException e){
+            throw new RuntimeException(e);
+        }
     }
 
     private static ResultSet getResultSet(String email, String password) throws SQLException, UserNotFoundException {
@@ -50,7 +54,6 @@ public class UtenteDao {
         }catch (IOException e) {
             throw new RuntimeException(e);
         }
-
         if(!rs.next()){
             throw new UserNotFoundException("Errore: Credenziali non valide");
         }

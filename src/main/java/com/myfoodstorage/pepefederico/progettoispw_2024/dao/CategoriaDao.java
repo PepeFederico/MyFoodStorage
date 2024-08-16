@@ -17,7 +17,7 @@ import java.util.Properties;
 public class CategoriaDao {
     private final ArrayList<Categoria> categoria = new ArrayList<>();
 
-    public void recuperoCategorie(String nomeAttivita, String nomeDispensa) throws Exception{
+    public void recuperoCategorie(String nomeAttivita, String nomeDispensa) throws CategoryNotFoundException{
         Connection connection = ConnectionFactory.getConnection();
         ResultSet rs;
 
@@ -29,17 +29,21 @@ public class CategoriaDao {
             query.setString(1,nomeAttivita);
             query.setString(2, nomeDispensa);
             rs = query.executeQuery();
+
+            if(rs.next()){
+                do{
+                    categoria.add(CategoriaFactory.getInstance().getCategoria(rs.getString("nomeCategoria"), nomeAttivita, nomeDispensa));
+                }while(rs.next());
+            }else{
+                throw new CategoryNotFoundException("La dispensa non presenta alcuna Categoria di Prodotti. Aggiungi una categoria");
+            }
+
         } catch (IOException | SQLException e) {
+            throw new RuntimeException(e);
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
 
-        if(rs.next()){
-            do{
-                categoria.add(CategoriaFactory.getInstance().getCategoria(rs.getString("nomeCategoria"), nomeAttivita, nomeDispensa));
-            }while(rs.next());
-        }else{
-            throw new CategoryNotFoundException("La dispensa non presenta alcuna Categoria di Prodotti. Aggiungi una categoria");
-        }
     }
     public ArrayList<Categoria> getCategoria() {
         return categoria;

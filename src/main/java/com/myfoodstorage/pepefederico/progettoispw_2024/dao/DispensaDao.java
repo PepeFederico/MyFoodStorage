@@ -17,13 +17,11 @@ import com.myfoodstorage.pepefederico.progettoispw_2024.model.Dispensa;
 public class DispensaDao {
     private final ArrayList<Dispensa> dispensa = new ArrayList<>();
 
-    public void recuperoDispensa(String nomeAttivita) throws Exception {
+    public void recuperoDispensa(String nomeAttivita) throws FoodStorageNotFoundException {
         Connection connection = ConnectionFactory.getConnection();
         ResultSet rs;
 
-        try(
-            InputStream input = new FileInputStream("risorseDB/queryDatabase.properties")
-        ){
+        try(InputStream input = new FileInputStream("risorseDB/queryDatabase.properties")){
             Properties properties = new Properties();
             properties.load(input);
 
@@ -31,16 +29,16 @@ public class DispensaDao {
             query.setString(1,nomeAttivita);
             rs = query.executeQuery();
 
+            if(rs.next()){
+                do{
+                    dispensa.add(DispensaFactory.getInstance().getDispensa(rs.getString("Dispensa"), rs.getInt("numeroBoxCategorie")));
+                }while (rs.next());
+            }else{
+                throw new FoodStorageNotFoundException("Ops, come è vuota la tua dispensa. Prova ad inserire una nuova dispensa!");
+            }
+
         } catch (IOException | SQLException e) {
             throw new RuntimeException(e);
-        }
-
-        if(rs.next()){
-            do{
-                dispensa.add(DispensaFactory.getInstance().getDispensa(rs.getString("Dispensa"), rs.getInt("numeroBoxCategorie")));
-            }while (rs.next());
-        }else{
-            throw new FoodStorageNotFoundException("Ops, come è vuota la tua dispensa. Prova ad inserire una nuova dispensa!");
         }
 
     }
