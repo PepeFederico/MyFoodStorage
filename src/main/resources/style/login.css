@@ -63,10 +63,6 @@
     -fx-font-size: 19px;
 }
 
-.check-box:selected .mark{
-    -fx-background-color: #62A4FB;
-}
-
 .error_label{
     -fx-text-fill: #FF0000;
 }
