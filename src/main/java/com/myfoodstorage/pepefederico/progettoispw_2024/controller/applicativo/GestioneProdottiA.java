@@ -80,25 +80,19 @@ public class GestioneProdottiA {
             String dispensaSelezionata = ClientController.getInstance().getDispensaBean().getNomeDispensa();
             String categoriaSelezionata = ClientController.getInstance().getCategoriaBean().getNomeCategoria();
 
-            //ricerca dispensa selezionata
-            for(int i = 0; i < DispenseUtente.getInstance().getDispense().size(); i++){
-                if(DispenseUtente.getInstance().getDispense().get(i).getNomeDispensa().equals(dispensaSelezionata)){
-                    //ricerca categoria selezionata
-                    for(int j = 0; j < DispenseUtente.getInstance().getDispense().get(i).getCategorie().size(); j++) {
-                        if (DispenseUtente.getInstance().getDispense().get(i).getCategorie().get(j).getNomeCategoria().equals(categoriaSelezionata)) {
-                            //puntato categoria selezionata
-                            //ho già caricato i prodotti
-                            if (DispenseUtente.getInstance().getDispense().get(i).getCategorie().get(j).getProdotti() == null) {
-                                ProdottoDao prodottoDAO = new ProdottoDao();
-                                prodottoDAO.recuperoProdotti(sessioneBean.getUtente().getNomeAttivita(), categoriaSelezionata, dispensaSelezionata);
-                                ArrayList<Prodotto> prodotti = prodottoDAO.getProdotti();
-                                DispenseUtente.getInstance().getDispense().get(i).getCategorie().get(j).setProdotti(prodotti);
-                            }
-                            infoToProdottiController(DispenseUtente.getInstance().getDispense().get(i).getCategorie().get(j).getProdotti());
-                        }
-                    }
-                }
+            Dispensa dispensa = searchDispensa(dispensaSelezionata);
+            int i = DispenseUtente.getInstance().getDispense().indexOf(dispensa);
+            Categoria categoria = searchCategoria(categoriaSelezionata,dispensa);
+            int j = DispenseUtente.getInstance().getDispense().get(i).getCategorie().indexOf(categoria);
+
+            if(categoria.getProdotti() == null){
+                ProdottoDao prodottoDAO = new ProdottoDao();
+                prodottoDAO.recuperoProdotti(sessioneBean.getUtente().getNomeAttivita(), categoriaSelezionata, dispensaSelezionata);
+                ArrayList<Prodotto> prodotti = prodottoDAO.getProdotti();
+                DispenseUtente.getInstance().getDispense().get(i).getCategorie().get(j).setProdotti(prodotti);
             }
+            infoToProdottiController(DispenseUtente.getInstance().getDispense().get(i).getCategorie().get(j).getProdotti());
+
         }catch (ProductNotFoundException e){
             throw new ProductNotFoundException("Ops, come è vuota la tua dispensa. Inserisci qualche prodotto");
         }catch (Exception e) {
@@ -140,4 +134,21 @@ public class GestioneProdottiA {
             prodBean.add(prodottobean);
         }
     }
+    private Dispensa searchDispensa(String dispensaSelezionata) {
+        for(int i = 0; i < DispenseUtente.getInstance().getDispense().size(); i++) {
+            if (DispenseUtente.getInstance().getDispense().get(i).getNomeDispensa().equals(dispensaSelezionata))
+                return DispenseUtente.getInstance().getDispense().get(i);
+        }
+        return null;
+    }
+    private Categoria searchCategoria(String categoriaSelezionata, Dispensa dispensa) {
+        for(int j = 0; j < dispensa.getCategorie().size(); j++) {
+            if (dispensa.getCategorie().get(j).getNomeCategoria().equals(categoriaSelezionata)) {
+                return dispensa.getCategorie().get(j);
+            }
+        }
+        return null;
+    }
+
+
 }
