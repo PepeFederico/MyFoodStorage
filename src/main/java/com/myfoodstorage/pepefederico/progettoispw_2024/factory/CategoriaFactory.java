@@ -11,9 +11,7 @@ public class CategoriaFactory {
         }
         return categoriaFactory;
     }
-    public Categoria getCategoria(String nomeCategoria, String nomeAttivita, String nomeDispensa) throws Exception {
-        Categoria categoria = new Categoria(nomeCategoria);
-        categoria.setProdotti(nomeAttivita, nomeDispensa);
-        return categoria;
+    public Categoria getCategoria(String nomeCategoria) {
+        return new Categoria(nomeCategoria);
     }
 }

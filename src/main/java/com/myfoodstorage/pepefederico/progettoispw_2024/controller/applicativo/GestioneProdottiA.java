@@ -20,8 +20,6 @@ public class GestioneProdottiA {
     private static final String ACTION = "Context error";
     private final Logger logger = Logger.getLogger(GestioneProdottiA.class.getName());
     private final SessioneBean sessioneBean;
-    private DispensaBean dispensaBean;
-    private CategoriaBean categoriaBean;
     private final ArrayList<DispensaBean> dispBean = new ArrayList<>();
     private final ArrayList<CategoriaBean> catBean = new ArrayList<>();
     private final ArrayList<ProdottoBean> prodBean = new ArrayList<>();
@@ -41,13 +39,13 @@ public class GestioneProdottiA {
 
     public void recuperoInfoDispensa() throws FoodStorageNotFoundException {
         try{
-            DispensaDao dispensaDAO = new DispensaDao();
-            dispensaDAO.recuperoDispensa(sessioneBean.getUtente().getNomeAttivita());
-            ArrayList<Dispensa> disp = dispensaDAO.getDispensa();
-            for(Dispensa dispensa : disp){
-                DispensaBean dispensabean = new DispensaBean(dispensa.getNomeDispensa());
-                dispBean.add(dispensabean);
+            if(DispenseUtente.getInstance().getDispense() == null){
+                DispensaDao dispensaDAO = new DispensaDao();
+                dispensaDAO.recuperoDispensa(sessioneBean.getUtente().getNomeAttivita());
+                ArrayList<Dispensa> disp = dispensaDAO.getDispensa();
+                DispenseUtente.getInstance().setDispense(disp);
             }
+            infoToDashboardController(DispenseUtente.getInstance().getDispense());
         }catch (FoodStorageNotFoundException e){
             throw new FoodStorageNotFoundException("Ops, come è vuota la tua dispensa. Prova ad inserire una nuova dispensa!");
         }
@@ -58,13 +56,17 @@ public class GestioneProdottiA {
 
     public void recuperoInfoCategoria() throws CategoryNotFoundException {
         try {
-            setDispensaBean(ClientController.getInstance().getDispensaBean());
-            CategoriaDao categoriaDAO = new CategoriaDao();
-            categoriaDAO.recuperoCategorie(sessioneBean.getUtente().getNomeAttivita(), dispensaBean.getNomeDispensa());
-            ArrayList<Categoria> categorias = categoriaDAO.getCategoria();
-            for (Categoria categoria : categorias) {
-                CategoriaBean categoriabean = new CategoriaBean(categoria.getNomeCategoria());
-                catBean.add(categoriabean);
+            String dispensaSelezionata = ClientController.getInstance().getDispensaBean().getNomeDispensa();
+            for(int i = 0; i < DispenseUtente.getInstance().getDispense().size(); i++){
+                if(DispenseUtente.getInstance().getDispense().get(i).getNomeDispensa().equals(dispensaSelezionata)){
+                    if(DispenseUtente.getInstance().getDispense().get(i).getCategorie() == null){
+                        CategoriaDao categoriaDAO = new CategoriaDao();
+                        categoriaDAO.recuperoCategorie(sessioneBean.getUtente().getNomeAttivita(), dispensaSelezionata);
+                        ArrayList<Categoria> categorias = categoriaDAO.getCategoria();
+                        DispenseUtente.getInstance().getDispense().get(i).setCategorie(categorias);
+                    }
+                    infoToCategoriaController(DispenseUtente.getInstance().getDispense().get(i).getCategorie());
+                }
             }
         }catch (CategoryNotFoundException e){
             throw new CategoryNotFoundException("La dispensa non presenta alcuna Categoria di Prodotti. Aggiungi una categoria");
@@ -75,21 +77,27 @@ public class GestioneProdottiA {
 
     public void recuperoInfoProdotti() throws ProductNotFoundException {
         try{
-            setDispensaBean(ClientController.getInstance().getDispensaBean());
-            setCategoriaBean(ClientController.getInstance().getCategoriaBean());
-            ProdottoDao prodottoDAO = new ProdottoDao();
-            prodottoDAO.recuperoProdotti(sessioneBean.getUtente().getNomeAttivita(), categoriaBean.getNomeCategoria() ,dispensaBean.getNomeDispensa());
-            ArrayList<Prodotto> prodotti = prodottoDAO.getProdotti();
-            for (Prodotto prodotto : prodotti) {
-                ProdottoBean prodottobean = new ProdottoBean(
-                                                prodotto.getNomeProdotto(),
-                                                prodotto.getNumeroLotto(),
-                                                prodotto.getScadenza(),
-                                                prodotto.getTaglia(),
-                                                prodotto.getScorte(),
-                                                prodotto.getCosto(),
-                                                prodotto.getTipoAnimale());
-                prodBean.add(prodottobean);
+            String dispensaSelezionata = ClientController.getInstance().getDispensaBean().getNomeDispensa();
+            String categoriaSelezionata = ClientController.getInstance().getCategoriaBean().getNomeCategoria();
+
+            //ricerca dispensa selezionata
+            for(int i = 0; i < DispenseUtente.getInstance().getDispense().size(); i++){
+                if(DispenseUtente.getInstance().getDispense().get(i).getNomeDispensa().equals(dispensaSelezionata)){
+                    //ricerca categoria selezionata
+                    for(int j = 0; j < DispenseUtente.getInstance().getDispense().get(i).getCategorie().size(); j++) {
+                        if (DispenseUtente.getInstance().getDispense().get(i).getCategorie().get(j).getNomeCategoria().equals(categoriaSelezionata)) {
+                            //puntato categoria selezionata
+                            //ho già caricato i prodotti
+                            if (DispenseUtente.getInstance().getDispense().get(i).getCategorie().get(j).getProdotti() == null) {
+                                ProdottoDao prodottoDAO = new ProdottoDao();
+                                prodottoDAO.recuperoProdotti(sessioneBean.getUtente().getNomeAttivita(), categoriaSelezionata, dispensaSelezionata);
+                                ArrayList<Prodotto> prodotti = prodottoDAO.getProdotti();
+                                DispenseUtente.getInstance().getDispense().get(i).getCategorie().get(j).setProdotti(prodotti);
+                            }
+                            infoToProdottiController(DispenseUtente.getInstance().getDispense().get(i).getCategorie().get(j).getProdotti());
+                        }
+                    }
+                }
             }
         }catch (ProductNotFoundException e){
             throw new ProductNotFoundException("Ops, come è vuota la tua dispensa. Inserisci qualche prodotto");
@@ -107,10 +115,29 @@ public class GestioneProdottiA {
     public ArrayList<ProdottoBean> getProdBean() {
         return prodBean;
     }
-    public void setDispensaBean(DispensaBean dispensaBean) {
-        this.dispensaBean = dispensaBean;
+    private void infoToDashboardController(ArrayList<Dispensa> d){
+        for(Dispensa dispensa : d){
+            DispensaBean dispensabean = new DispensaBean(dispensa.getNomeDispensa());
+            dispBean.add(dispensabean);
+        }
     }
-    public void setCategoriaBean(CategoriaBean categoriaBean){
-        this.categoriaBean = categoriaBean;
+    private void infoToCategoriaController(ArrayList<Categoria> c){
+        for (Categoria categoria : c) {
+            CategoriaBean categoriabean = new CategoriaBean(categoria.getNomeCategoria());
+            catBean.add(categoriabean);
+        }
+    }
+    private void infoToProdottiController(ArrayList<Prodotto> p){
+        for (Prodotto prodotto : p) {
+            ProdottoBean prodottobean = new ProdottoBean(
+                    prodotto.getNomeProdotto(),
+                    prodotto.getNumeroLotto(),
+                    prodotto.getScadenza(),
+                    prodotto.getTaglia(),
+                    prodotto.getScorte(),
+                    prodotto.getCosto(),
+                    prodotto.getTipoAnimale());
+            prodBean.add(prodottobean);
+        }
     }
 }

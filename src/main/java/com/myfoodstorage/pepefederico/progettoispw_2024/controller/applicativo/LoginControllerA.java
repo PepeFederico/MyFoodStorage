@@ -3,6 +3,7 @@ package com.myfoodstorage.pepefederico.progettoispw_2024.controller.applicativo;
 import com.myfoodstorage.pepefederico.progettoispw_2024.dao.UtenteDao;
 import com.myfoodstorage.pepefederico.progettoispw_2024.exceptions.UserNotFoundException;
 import com.myfoodstorage.pepefederico.progettoispw_2024.bean.UtenteLoginBean;
+import com.myfoodstorage.pepefederico.progettoispw_2024.model.DispenseUtente;
 import com.myfoodstorage.pepefederico.progettoispw_2024.model.Model;
 import com.myfoodstorage.pepefederico.progettoispw_2024.model.Sessione;
 import com.myfoodstorage.pepefederico.progettoispw_2024.model.Utente;
@@ -42,6 +43,7 @@ public class LoginControllerA {
     }
     public void logout(SessioneBean sessione){
         Model.getInstance().removeSessioneUtenteRistoratore(sessione.getIdSessione());
+        DispenseUtente.getInstance().setLogoutDispenseUtente();
     }
     private void fillUtenteBean(Utente utente){
         utenteBean.setNome(utente.getNome());

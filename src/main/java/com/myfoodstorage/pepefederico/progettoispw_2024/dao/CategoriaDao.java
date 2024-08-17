@@ -30,7 +30,7 @@ public class CategoriaDao {
 
             if(rs.next()){
                 do{
-                    categoria.add(CategoriaFactory.getInstance().getCategoria(rs.getString("nomeCategoria"), nomeAttivita, nomeDispensa));
+                    categoria.add(CategoriaFactory.getInstance().getCategoria(rs.getString("nomeCategoria")));
                 }while(rs.next());
             }else{
                 throw new CategoryNotFoundException("La dispensa non presenta alcuna Categoria di Prodotti. Aggiungi una categoria");
