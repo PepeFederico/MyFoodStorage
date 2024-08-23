@@ -3,7 +3,7 @@ package com.myfoodstorage.pepefederico.progettoispw_2024.controller.applicativo;
 import com.myfoodstorage.pepefederico.progettoispw_2024.bean.*;
 import com.myfoodstorage.pepefederico.progettoispw_2024.boundary.SimpleMail;
 import com.myfoodstorage.pepefederico.progettoispw_2024.controller.grafico.ClientController;
-import com.myfoodstorage.pepefederico.progettoispw_2024.dao.OrdineDAO;
+import com.myfoodstorage.pepefederico.progettoispw_2024.dao.OrdineDao;
 import com.myfoodstorage.pepefederico.progettoispw_2024.exceptions.FailSendMail;
 import com.myfoodstorage.pepefederico.progettoispw_2024.exceptions.ProductNotFoundException;
 import com.myfoodstorage.pepefederico.progettoispw_2024.exceptions.SearchException;
@@ -99,7 +99,7 @@ public class OrdineProdottiControllerA {
 
     public void recuperaOrdini() throws ZeroOrderException {
         try {
-            OrdineDAO ordineDAO = new OrdineDAO();
+            OrdineDao ordineDAO = new OrdineDao();
             ordineDAO.recuperaInfoOrdini();
 
             ArrayList<Ordine> ordini = ordineDAO.getOrdine();

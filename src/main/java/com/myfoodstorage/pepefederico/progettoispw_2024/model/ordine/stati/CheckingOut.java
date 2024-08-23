@@ -1,7 +1,7 @@
 package com.myfoodstorage.pepefederico.progettoispw_2024.model.ordine.stati;
 
-import com.myfoodstorage.pepefederico.progettoispw_2024.dao.OrdineDAO;
-import com.myfoodstorage.pepefederico.progettoispw_2024.dao.RecuperoInfoFornitoriDAO;
+import com.myfoodstorage.pepefederico.progettoispw_2024.dao.OrdineDao;
+import com.myfoodstorage.pepefederico.progettoispw_2024.dao.RecuperoInfoFornitoriDao;
 import com.myfoodstorage.pepefederico.progettoispw_2024.model.Prodotto;
 import com.myfoodstorage.pepefederico.progettoispw_2024.model.ProdottoFornito;
 import com.myfoodstorage.pepefederico.progettoispw_2024.model.ordine.Ordine;
@@ -18,7 +18,7 @@ public class CheckingOut implements Stato {
 
     @Override
     public ArrayList<ProdottoFornito> elaboraOrdine(String nomeAttivita) {
-        RecuperoInfoFornitoriDAO infoFornitori = new RecuperoInfoFornitoriDAO();
+        RecuperoInfoFornitoriDao infoFornitori = new RecuperoInfoFornitoriDao();
         infoFornitori.recuperoFornitori(nomeAttivita);
         ordine.setNomeFornitore(infoFornitori.getNomeFornitore());
         return infoFornitori.getProdotti();
@@ -31,7 +31,7 @@ public class CheckingOut implements Stato {
 
     @Override
     public void inoltraOrdine() {
-        OrdineDAO ordineDAO = new OrdineDAO();
+        OrdineDao ordineDAO = new OrdineDao();
         ordineDAO.salvaOrdine(ordine, "Attesa", ordine.getNomeFornitore());
         ordine.setStati(ordine.getAttesa());
     }

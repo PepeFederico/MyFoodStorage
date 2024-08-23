@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.StringTokenizer;
 
-public class OrdineDAO {
+public class OrdineDao {
     private int countOrdini = 0;
     private final File directoryName = new File("D:\\ProgrammiJava\\progettoISPW_2024\\ordineProdotti");
     private ArrayList<Ordine> ordine;
@@ -76,15 +76,13 @@ public class OrdineDAO {
             StringTokenizer obj = new StringTokenizer(line, " ");
 
             while(obj.hasMoreTokens()){
-
                 if(obj.nextToken().equals("Rifiutato")){
                     stato = obj.nextToken();
                 } else if(obj.nextToken().equals("Accettato")){
                     stato = obj.nextToken();
-                } else {
+                } else if(obj.nextToken().equals("Attesa")){
                     stato = obj.nextToken();
                 }
-
             }
             bufferedReader.close();
             file.close();
@@ -178,11 +176,9 @@ public class OrdineDAO {
         countFile();
         return "ordine_"+ this.countOrdini+".txt";
     }
-
     private void countFile(){
         this.countOrdini = Objects.requireNonNull(directoryName.list()).length;
     }
-
     public ArrayList<Ordine> getOrdine() {
         return ordine;
     }
