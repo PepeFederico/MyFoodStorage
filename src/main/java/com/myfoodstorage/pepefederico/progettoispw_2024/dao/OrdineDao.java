@@ -43,19 +43,7 @@ public class OrdineDao {
         ordine = new ArrayList<>();
         for(int i = 0; i < this.countOrdini; i++){
             ordine.add(OrdineFactory.getInstance().getOrdine());
-
-            switch(letturaStatoOrdine(i)){
-                case "Accettato":
-                    ordine.get(i).setStati(ordine.get(i).getAccettato());
-                    break;
-
-                case "Rifiutato":
-                    ordine.get(i).setStati(ordine.get(i).getRifiutato());
-                    break;
-
-                default:
-                    ordine.get(i).setStati(ordine.get(i).getAttesa());
-            }
+            letturaStatoOrdine(i);
 
             ordine.get(i).setNomeFornitore(letturaFornitore(i));
             letturaOrdine(i);
@@ -65,9 +53,8 @@ public class OrdineDao {
 
     }
 
-    private String letturaStatoOrdine(int i){
+    private void letturaStatoOrdine(int i){
         String nomeOrdineFile = directoryName + "\\" + "ordine_" + i +".txt";
-        String stato = "";
         try{
             FileReader file = new FileReader(nomeOrdineFile);
             BufferedReader bufferedReader = new BufferedReader(file);
@@ -76,10 +63,13 @@ public class OrdineDao {
             StringTokenizer obj = new StringTokenizer(line, " ");
 
             while(obj.hasMoreTokens()){
-                switch (obj.nextToken()) {
-                    case "Rifiutato"    -> stato = obj.nextToken();
-                    case "Accettato"    -> stato = obj.nextToken();
-                    default             -> stato = obj.nextToken();
+                String stato = obj.nextToken();
+
+                switch (stato) {
+                    case "Attesa"       -> ordine.get(i).setStati(ordine.get(i).getAttesa());
+                    case "Rifiutato"    -> ordine.get(i).setStati(ordine.get(i).getRifiutato());
+                    case "Accettato"    -> ordine.get(i).setStati(ordine.get(i).getAccettato());
+                    default             -> stato = "";
                 }
             }
             bufferedReader.close();
@@ -87,7 +77,6 @@ public class OrdineDao {
         }catch (IOException e) {
             throw new RuntimeException(e);
         }
-        return stato;
     }
 
     private String letturaFornitore(int i){
