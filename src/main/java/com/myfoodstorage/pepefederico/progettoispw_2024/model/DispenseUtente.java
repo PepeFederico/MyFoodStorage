@@ -19,12 +19,15 @@ public class DispenseUtente {
 
     public void setLogoutDispenseUtente() {
         this.dispense = null;
-        dispenseUtente = null;
+        setDispenseUtente();
     }
     public ArrayList<Dispensa> getDispense() {
         return dispense;
     }
     public void setDispense(ArrayList<Dispensa> dispense) {
         this.dispense = dispense;
+    }
+    private static synchronized void setDispenseUtente(){
+        dispenseUtente = null;
     }
 }
