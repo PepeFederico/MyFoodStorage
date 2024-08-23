@@ -32,7 +32,9 @@ public class Creazione implements Stato {
 
     @Override
     public void inoltraOrdine() {
-
+        /*
+            Metodo è vuoto poichè non ha senso per la classe in questione
+         */
     }
 
 }
