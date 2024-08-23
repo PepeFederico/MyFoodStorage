@@ -1,0 +1,40 @@
+.container{
+    -fx-text-fill: #62A4FB;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-alignment: center;
+    -fx-background-color: #FFFFFF;
+}
+
+.container Button{
+    -fx-pref-width: 140;
+    -fx-pref-height: 50;
+    -fx-background-color: #FFFFFF;
+    -fx-text-fill: #FF0000;
+    -fx-font-size: 15px;
+    -fx-alignment: center;
+}
+
+.container Button:hover{
+    -fx-background-color: #FF0000;
+    -fx-text-fill: #FFFFFF;
+}
+
+.container_modify{
+    -fx-pref-width: 140;
+    -fx-pref-height: 50;
+    -fx-background-color: #FFFFFF;
+    -fx-text-fill: #62A4FB;
+    -fx-font-size: 15px;
+    -fx-alignment: center;
+}
+
+.container_modify:hover{
+    -fx-background-color: #62A4FB;
+    -fx-text-fill: #FFFFFF;
+}
+
+.qtaRichiesta{
+    -fx-font-size: 20px;
+    -fx-background-color: #FFFFFF;
+}

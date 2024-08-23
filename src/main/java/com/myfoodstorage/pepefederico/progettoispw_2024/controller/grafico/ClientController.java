@@ -1,13 +1,12 @@
 package com.myfoodstorage.pepefederico.progettoispw_2024.controller.grafico;
-import com.myfoodstorage.pepefederico.progettoispw_2024.bean.CategoriaBean;
-import com.myfoodstorage.pepefederico.progettoispw_2024.bean.DispensaBean;
-import com.myfoodstorage.pepefederico.progettoispw_2024.bean.SessioneBean;
+import com.myfoodstorage.pepefederico.progettoispw_2024.bean.*;
 import com.myfoodstorage.pepefederico.progettoispw_2024.controller.applicativo.LoginControllerA;
 import com.myfoodstorage.pepefederico.progettoispw_2024.model.Model;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class ClientController implements Initializable {
@@ -15,6 +14,8 @@ public class ClientController implements Initializable {
     private SessioneBean sessioneUtente;
     private DispensaBean dispensaBean;
     private CategoriaBean categoriaBean;
+    private OrdineBean ordineBean;
+    private ArrayList<ProdottoBean> prodottiBeans;
     private static ClientController clientController;
 
     private ClientController() {}
@@ -42,11 +43,15 @@ public class ClientController implements Initializable {
                     Model.getInstance().getViewFactory().closeStage(stage);
                     Model.getInstance().getViewFactory().closeApplication();
                     Model.getInstance().getViewFactory().showLoginWindow();
-                break;
+                    break;
 
                 case "contratti":
                     clientParent.setCenter(Model.getInstance().getViewFactory().getContrattiView());
-                break;
+                    break;
+
+                case "ordine":
+                    clientParent.setCenter(Model.getInstance().getViewFactory().getRicercaOrdineView());
+                    break;
 
                 default:
                     clientParent.setCenter(Model.getInstance().getViewFactory().getDashboardView());
@@ -78,10 +83,48 @@ public class ClientController implements Initializable {
     public void setClientParentProdotti(){
         clientParent.setCenter(Model.getInstance().getViewFactory().getProdottiView());
     }
+    public void setProdottiOrdine(){
+        clientParent.setCenter(Model.getInstance().getViewFactory().getOrdineProdottiView());
+    }
     public void backToDashboardView() {
         clientParent.setCenter(Model.getInstance().getViewFactory().getDashboardView());
     }
     public void backToCategoriaView(){
         clientParent.setCenter(Model.getInstance().getViewFactory().getCategoriaView());
     }
+    public ArrayList<ProdottoBean> getProdottiBeans() {
+        return prodottiBeans;
+    }
+    public void setProdottiBeans(ArrayList<ProdottoBean> prodottiBeans) {
+        this.prodottiBeans = prodottiBeans;
+    }
+    public void backToRicercaOrdineProdottiView(){
+        clientParent.setCenter(Model.getInstance().getViewFactory().getRicercaOrdineView());
+    }
+    public OrdineBean getOrdineBean() {
+        return ordineBean;
+    }
+    public void setOrdineBean(OrdineBean ordineBean) {
+        this.ordineBean = ordineBean;
+    }
+    public void addOrdineBean(ProdottoOrdineBean prodottoOrdineBean){
+        ordineBean.setProdotti(prodottoOrdineBean);
+    }
+    public void visualizzaOrdineView(){
+        clientParent.setCenter(Model.getInstance().getViewFactory().getVisualizzaProdottiView());
+    }
+    public void backToOrdineView(){
+        clientParent.setCenter(Model.getInstance().getViewFactory().getOrdineProdottiView());
+    }
+    public void visualizzaStatoOrdini(){
+        clientParent.setCenter(Model.getInstance().getViewFactory().getVisualizzaOrdiniView());
+    }
+    public void setClientParentProdottiOrdinati(){
+        clientParent.setCenter(Model.getInstance().getViewFactory().getVisualizzaProdottiOrdinatiView());
+    }
+
+    public void backToStatoOrdiniView(){
+        clientParent.setCenter(Model.getInstance().getViewFactory().getVisualizzaOrdiniView());
+    }
+
 }

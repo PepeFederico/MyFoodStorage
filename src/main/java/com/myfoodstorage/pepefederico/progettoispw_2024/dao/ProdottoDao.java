@@ -1,6 +1,7 @@
 package com.myfoodstorage.pepefederico.progettoispw_2024.dao;
 
 import com.myfoodstorage.pepefederico.progettoispw_2024.exceptions.ProductNotFoundException;
+import com.myfoodstorage.pepefederico.progettoispw_2024.exceptions.SearchException;
 import com.myfoodstorage.pepefederico.progettoispw_2024.factory.ConnectionFactory;
 import com.myfoodstorage.pepefederico.progettoispw_2024.factory.ProdottoFactory;
 import com.myfoodstorage.pepefederico.progettoispw_2024.model.Prodotto;
@@ -18,9 +19,9 @@ import java.util.Properties;
 public class ProdottoDao {
     private final ArrayList<Prodotto> prodotti = new ArrayList<>();
 
-    public void recuperoProdotti(String nomeAttivita, String nomeCategoria, String nomeDispensa) throws ProductNotFoundException {
-        ResultSet rs = getResultSet(nomeAttivita, nomeCategoria, nomeDispensa);
+    public void recuperoProdotti(String nomeAttivita, String nomeCategoria, String nomeDispensa) throws ProductNotFoundException, SearchException {
         try {
+            ResultSet rs = getResultSet(nomeAttivita, nomeCategoria, nomeDispensa);
             if(rs.next()){
                 do{
                     prodotti.add(ProdottoFactory.getInstance().getProdotto(
@@ -37,10 +38,12 @@ public class ProdottoDao {
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        } catch (SearchException e){
+            throw new SearchException("Campi non corrispondono alle dispense memorizzate");
         }
     }
 
-    private static ResultSet getResultSet(String nomeAttivita, String nomeCategoria, String nomeDispensa) {
+    private static ResultSet getResultSet(String nomeAttivita, String nomeCategoria, String nomeDispensa) throws SearchException {
         Connection connection = ConnectionFactory.getConnection();
         ResultSet rs;
 
@@ -54,7 +57,10 @@ public class ProdottoDao {
             query.setString(3, nomeCategoria);
             rs = query.executeQuery();
 
-        }catch (IOException | SQLException e) {
+            if(!rs.isBeforeFirst() && rs.getRow() == 0){
+                throw new SearchException("Campi non corrispondono alle dispense memorizzate");
+            }
+        } catch (SQLException | IOException e) {
             throw new RuntimeException(e);
         }
         return rs;

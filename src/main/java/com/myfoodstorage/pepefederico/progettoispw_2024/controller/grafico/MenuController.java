@@ -33,6 +33,7 @@ public class MenuController implements Initializable {
         profiloButton.setOnAction(actionEvent -> onProfilo());
         logoutButton.setOnAction(actionEvent -> onLogout());
         contrattiButton.setOnAction(actionEvent -> onContratti());
+        ordineButton.setOnAction(actionEvent -> onOrdine());
     }
 
     private void onContratti() {
@@ -46,6 +47,9 @@ public class MenuController implements Initializable {
     }
     private void onDashboard() {
         Model.getInstance().getViewFactory().getClientSelectedMenuItem().set("homeDashboard");
+    }
+    private void onOrdine(){
+        Model.getInstance().getViewFactory().getClientSelectedMenuItem().set("ordine");
     }
 
 }

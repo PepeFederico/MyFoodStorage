@@ -1,4 +1,4 @@
-package com.myfoodstorage.pepefederico.progettoispw_2024.controller.grafico;
+package com.myfoodstorage.pepefederico.progettoispw_2024.controller.grafico.item;
 
 import com.myfoodstorage.pepefederico.progettoispw_2024.bean.ContrattoBean;
 import javafx.fxml.FXML;

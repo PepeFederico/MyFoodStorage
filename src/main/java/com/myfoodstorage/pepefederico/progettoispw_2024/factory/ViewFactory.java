@@ -20,6 +20,11 @@ public class ViewFactory {
     private AnchorPane profiloView;
     private AnchorPane prodottiView;
     private AnchorPane contrattiView;
+    private AnchorPane ricercaOrdineView;
+    private AnchorPane ordineProdottiView;
+    private AnchorPane visualizzaProdottiView;
+    private AnchorPane visualizzaOrdiniView;
+    private AnchorPane visualizzaProdottiOrdinatiView;
     private final StringProperty clientSelectedMenuItem;
     public ViewFactory(){
         this.clientSelectedMenuItem = new SimpleStringProperty("");
@@ -84,6 +89,61 @@ public class ViewFactory {
         return contrattiView;
     }
 
+    public AnchorPane getRicercaOrdineView(){
+        if (ricercaOrdineView == null){
+            try{
+                ricercaOrdineView = new FXMLLoader(getClass().getResource("/com/myfoodstorage/pepefederico/progettoispw_2024/utenteRistoratore/ricercaOrdineProdotti.fxml")).load();
+            }catch (Exception e){
+                logger.log(Level.SEVERE, ACTION, e);
+            }
+        }
+        return ricercaOrdineView;
+    }
+
+    public AnchorPane getOrdineProdottiView(){
+        if (ordineProdottiView == null){
+            try{
+                ordineProdottiView = new FXMLLoader(getClass().getResource("/com/myfoodstorage/pepefederico/progettoispw_2024/utenteRistoratore/prodottiOrdine.fxml")).load();
+            }catch (Exception e){
+                logger.log(Level.SEVERE, ACTION, e);
+            }
+        }
+        return ordineProdottiView;
+    }
+
+    public AnchorPane getVisualizzaProdottiView(){
+        if (visualizzaProdottiView == null){
+            try{
+                visualizzaProdottiView = new FXMLLoader(getClass().getResource("/com/myfoodstorage/pepefederico/progettoispw_2024/utenteRistoratore/visualizzaOrdine.fxml")).load();
+            }catch (Exception e){
+                logger.log(Level.SEVERE, ACTION, e);
+            }
+        }
+        return visualizzaProdottiView;
+    }
+
+    public AnchorPane getVisualizzaOrdiniView(){
+        if (visualizzaOrdiniView == null){
+            try{
+                visualizzaOrdiniView = new FXMLLoader(getClass().getResource("/com/myfoodstorage/pepefederico/progettoispw_2024/utenteRistoratore/visualizzaStatoOrdine.fxml")).load();
+            }catch (Exception e){
+                logger.log(Level.SEVERE, ACTION, e);
+            }
+        }
+        return visualizzaOrdiniView;
+    }
+
+    public AnchorPane getVisualizzaProdottiOrdinatiView(){
+        if (visualizzaProdottiOrdinatiView == null){
+            try{
+                visualizzaProdottiOrdinatiView = new FXMLLoader(getClass().getResource("/com/myfoodstorage/pepefederico/progettoispw_2024/utenteRistoratore/visualizzaOrdineProdotti.fxml")).load();
+            }catch (Exception e){
+                logger.log(Level.SEVERE, ACTION, e);
+            }
+        }
+        return visualizzaProdottiOrdinatiView;
+    }
+
     public void showLoginWindow(){
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/myfoodstorage/pepefederico/progettoispw_2024/login.fxml"));
         createStage(loader);
@@ -116,8 +176,9 @@ public class ViewFactory {
         this.contrattiView = null;
         this.dashboardView = null;
         this.categoriaView = null;
+        this.ordineProdottiView = null;
+        this.ricercaOrdineView = null;
     }
-
     public void closeStage(Stage stage){
         stage.close();
     }
@@ -126,5 +187,16 @@ public class ViewFactory {
     }
     public void setProdottiView(){
         this.prodottiView = null;
+    }
+    public void setOrdineProdottiView() {
+        ordineProdottiView = null;
+        ricercaOrdineView = null;
+        visualizzaProdottiView = null;
+    }
+    public void setVisualizzaProdottiView() {
+        this.visualizzaProdottiView = null;
+    }
+    public void setVisualizzaOrdiniView(){
+        this.visualizzaProdottiOrdinatiView = null;
     }
 }

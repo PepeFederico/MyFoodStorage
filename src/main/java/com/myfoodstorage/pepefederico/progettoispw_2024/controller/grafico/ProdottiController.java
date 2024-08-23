@@ -2,6 +2,7 @@ package com.myfoodstorage.pepefederico.progettoispw_2024.controller.grafico;
 
 import com.myfoodstorage.pepefederico.progettoispw_2024.bean.ProdottoBean;
 import com.myfoodstorage.pepefederico.progettoispw_2024.controller.applicativo.GestioneProdottiA;
+import com.myfoodstorage.pepefederico.progettoispw_2024.controller.grafico.item.ItemProdottoController;
 import com.myfoodstorage.pepefederico.progettoispw_2024.exceptions.ProductNotFoundException;
 import com.myfoodstorage.pepefederico.progettoispw_2024.model.Model;
 import javafx.fxml.FXML;

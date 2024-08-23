@@ -27,6 +27,19 @@ public class Prodotto {
         this.tipoAnimale = tipoAnimale;
     }
 
+    public Prodotto(String nomeProdotto, int scorte, TipoAnimale tipoAnimale) {
+        this.nomeProdotto = nomeProdotto;
+        this.scorte = scorte;
+        this.tipoAnimale = tipoAnimale;
+    }
+
+    public Prodotto(String nomeProdotto, TipoAnimale tipoAnimale) {
+        this.nomeProdotto = nomeProdotto;
+        this.tipoAnimale = tipoAnimale;
+    }
+
+    public Prodotto(){}
+
     public String getNomeProdotto() {
         return nomeProdotto;
     }

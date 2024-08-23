@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="800.0" prefWidth="800.0" styleClass="menu_container" stylesheets="@../../../../../style/ricercaOrdine.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.myfoodstorage.pepefederico.progettoispw_2024.controller.grafico.RicercaOrdineProdottiController">
+      <VBox alignment="TOP_CENTER" prefHeight="800.0" prefWidth="800.0">
+            <Label text="Ordine Prodotti">
+         <font>
+            <Font name="System Bold" size="30.0" />
+         </font>
+         <VBox.margin>
+            <Insets />
+         </VBox.margin></Label>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" styleClass="ordine_text_information" stylesheets="@../../../../../style/ricercaOrdine.css">
+              <Label disable="true" text="Digita la Dispensa : " />
+              <TextField fx:id="dispensaInput" />
+         <VBox.margin>
+            <Insets top="100.0" />
+         </VBox.margin>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" styleClass="ordine_text_information" stylesheets="@../../../../../style/ricercaOrdine.css">
+              <Label disable="true" text="Digita la Categoria : " />
+              <TextField fx:id="categoriaInput" />
+            </HBox>
+            <Button fx:id="ricercaProdotti" mnemonicParsing="false" styleClass="menu_container" stylesheets="@../../../../../style/ricercaOrdine.css" text="Start Ricerca">
+         <VBox.margin>
+            <Insets bottom="50.0" top="50.0" />
+         </VBox.margin></Button>
+            <Button fx:id="visualizzaOrdini" mnemonicParsing="false" styleClass="menu_container" stylesheets="@../../../../../style/ricercaOrdine.css" text="Stato Ordini" />
+      </VBox>
+</AnchorPane>

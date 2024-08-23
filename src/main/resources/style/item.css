@@ -7,3 +7,25 @@
     -fx-border-color: #62A4FB;
     -fx-border-width: 2px;
 }
+
+.container Button{
+    -fx-pref-width: 240;
+    -fx-pref-height: 50;
+    -fx-background-color: #FFFFFF;
+    -fx-text-fill: #62A4FB;
+    -fx-font-size: 20px;
+    -fx-alignment: center;
+    -fx-border-color: #62A4FB;
+}
+
+.container Button:hover{
+    -fx-background-color: #62A4FB;
+    -fx-text-fill: #FFFFFF;
+    -fx-border-color: #FFFFFF;
+}
+
+.qta_information_container{
+    -fx-font-size: 25px;
+    -fx-border-color: #62A4FB;
+    -fx-background-color: #FFFFFF;
+}

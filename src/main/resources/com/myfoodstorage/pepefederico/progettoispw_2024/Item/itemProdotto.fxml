@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="400.0" prefWidth="350.0" styleClass="container" stylesheets="@../../../../../style/item.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.myfoodstorage.pepefederico.progettoispw_2024.controller.grafico.ItemProdottoController">
+<AnchorPane prefHeight="400.0" prefWidth="350.0" styleClass="container" stylesheets="@../../../../../style/item.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.myfoodstorage.pepefederico.progettoispw_2024.controller.grafico.item.ItemProdottoController">
   <VBox alignment="CENTER" prefHeight="400.0" prefWidth="350.0">
         <ImageView fx:id="iconaProdotto" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
             <Image url="@../../../../../image/imageCategoria/diet.png" />

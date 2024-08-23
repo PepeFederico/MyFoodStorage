@@ -2,6 +2,7 @@ package com.myfoodstorage.pepefederico.progettoispw_2024.controller.grafico;
 
 import com.myfoodstorage.pepefederico.progettoispw_2024.bean.DispensaBean;
 import com.myfoodstorage.pepefederico.progettoispw_2024.controller.applicativo.GestioneProdottiA;
+import com.myfoodstorage.pepefederico.progettoispw_2024.controller.grafico.item.ItemDispensaController;
 import com.myfoodstorage.pepefederico.progettoispw_2024.exceptions.FoodStorageNotFoundException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

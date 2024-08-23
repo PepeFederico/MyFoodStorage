@@ -10,6 +10,7 @@ import com.myfoodstorage.pepefederico.progettoispw_2024.dao.ProdottoDao;
 import com.myfoodstorage.pepefederico.progettoispw_2024.exceptions.CategoryNotFoundException;
 import com.myfoodstorage.pepefederico.progettoispw_2024.exceptions.FoodStorageNotFoundException;
 import com.myfoodstorage.pepefederico.progettoispw_2024.exceptions.ProductNotFoundException;
+import com.myfoodstorage.pepefederico.progettoispw_2024.exceptions.SearchException;
 import com.myfoodstorage.pepefederico.progettoispw_2024.model.*;
 import com.myfoodstorage.pepefederico.progettoispw_2024.dao.DispensaDao;
 import java.util.ArrayList;
@@ -93,9 +94,36 @@ public class GestioneProdottiA {
             }
             infoToProdottiController(DispenseUtente.getInstance().getDispense().get(i).getCategorie().get(j).getProdotti());
 
-        }catch (ProductNotFoundException e){
+        }catch (ProductNotFoundException | SearchException e){
             throw new ProductNotFoundException("Ops, come è vuota la tua dispensa. Inserisci qualche prodotto");
         }catch (Exception e) {
+            logger.log(Level.SEVERE, ACTION, e);
+        }
+    }
+
+    public void recuperoProdotti(DispensaBean dispensaBean, CategoriaBean categoriaBean) throws ProductNotFoundException, SearchException {
+        try{
+            ProdottoDao prodottoDAO = new ProdottoDao();
+            prodottoDAO.recuperoProdotti(sessioneBean.getUtente().getNomeAttivita(), categoriaBean.getNomeCategoria() ,dispensaBean.getNomeDispensa());
+            ArrayList<Prodotto> prodotti = prodottoDAO.getProdotti();
+            for (Prodotto prodotto : prodotti) {
+                ProdottoBean prodottobean = new ProdottoBean(
+                        prodotto.getNomeProdotto(),
+                        prodotto.getNumeroLotto(),
+                        prodotto.getScadenza(),
+                        prodotto.getTaglia(),
+                        prodotto.getScorte(),
+                        prodotto.getCosto(),
+                        prodotto.getTipoAnimale());
+                prodBean.add(prodottobean);
+            }
+        }catch (ProductNotFoundException e){
+            throw new ProductNotFoundException("Ops, come è vuota la tua dispensa. Inserisci qualche prodotto");
+        }
+        catch (SearchException e){
+            throw new SearchException("Campi non corrispondono alle dispense memorizzate");
+        }
+        catch (Exception e) {
             logger.log(Level.SEVERE, ACTION, e);
         }
     }
@@ -149,6 +177,5 @@ public class GestioneProdottiA {
         }
         return null;
     }
-
 
 }

@@ -1,0 +1,26 @@
+.menu_container{
+    -fx-background-color: #FFFFFF;
+    -fx-alignment: center;
+}
+
+.menu_container Button{
+    -fx-pref-width: 240;
+    -fx-pref-height: 50;
+    -fx-background-color: #FFFFFF;
+    -fx-text-fill: #000000;
+    -fx-font-size: 20px;
+    -fx-alignment: center;
+    -fx-border-color: #62A4FB;
+}
+
+.menu_container Button:hover{
+    -fx-background-color: #62A4FB;
+    -fx-text-fill: #FFFFFF;
+    -fx-border-color: #FFFFFF;
+}
+
+.ordine_text_information{
+    -fx-font-weight: bold;
+    -fx-font-size: 20px;
+    -fx-text-fill: #000000;
+}
