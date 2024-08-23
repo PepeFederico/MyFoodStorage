@@ -16,14 +16,13 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
 public class SimpleMail {
-
-    private static String myAccountEmail;
-    private static String password;
-    private static FileOrdine fileOrdine;
+    private String myAccountEmail;
+    private String password;
+    private FileOrdine fileOrdine;
 
     public SimpleMail() {}
 
-    public static void sendMail(OrdineBean ordineBean) throws MessagingException {
+    public void sendMail(OrdineBean ordineBean) throws MessagingException {
 
         Properties props = new Properties();
 
@@ -58,7 +57,7 @@ public class SimpleMail {
         }
     }
 
-    private static Message prepareMessage(
+    private Message prepareMessage(
             Session session,
             String myAccountEmail,
             String recepient,
@@ -88,7 +87,7 @@ public class SimpleMail {
         return null;
     }
 
-    private static MimeMultipart getMimeMultipart() throws IOException, MessagingException {
+    private MimeMultipart getMimeMultipart() throws IOException, MessagingException {
         MimeMultipart multipart = new MimeMultipart();
 
         //-------setting di un allegato---------//

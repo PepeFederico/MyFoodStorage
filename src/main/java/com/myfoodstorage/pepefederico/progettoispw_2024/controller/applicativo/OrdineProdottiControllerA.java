@@ -19,7 +19,6 @@ public class OrdineProdottiControllerA {
     private final SessioneBean sessioneBean;
     private ArrayList<ProdottoBean> prodBean = new ArrayList<>();
     private OrdineBean ordineBean;
-    private Ordine ordineProdotti;
     private final ArrayList<OrdineBean> ordiniEffetuati;
 
     public OrdineProdottiControllerA(SessioneBean sessioneBean) {
@@ -65,7 +64,7 @@ public class OrdineProdottiControllerA {
        try {
             setOrdineBean(ordineBean);
             String nomeAttivita = ClientController.getInstance().getSessioneUtente().getUtente().getNomeAttivita();
-            ordineProdotti = OrdineFactory.getInstance().getOrdine();
+           Ordine ordineProdotti = OrdineFactory.getInstance().getOrdine();
 
             ArrayList<Prodotto> prodotti = new ArrayList<>();
             for(int i = 0; i < ordineBean.getProdotti().size(); i++){
@@ -89,7 +88,8 @@ public class OrdineProdottiControllerA {
             ordineBean.setContattoFornitore(ordineProdotti.getContattoFornitore());
             ordineBean.setNomeFornitore(ordineProdotti.getNomeFornitore());
 
-            SimpleMail.sendMail(ordineBean);
+            SimpleMail simpleMail = new SimpleMail();
+            simpleMail.sendMail(ordineBean);
 
        }
        catch (MessagingException e) {
@@ -137,15 +137,10 @@ public class OrdineProdottiControllerA {
         );
     }
 
-    public ArrayList<ProdottoBean> getProdBean() {
-        return prodBean;
-    }
     public void setProdBean(ArrayList<ProdottoBean> prodBean) {
         this.prodBean = prodBean;
     }
-    public OrdineBean getOrdineBean() {
-        return ordineBean;
-    }
+
     public void setOrdineBean(OrdineBean ordineBean) {
         this.ordineBean = ordineBean;
     }
