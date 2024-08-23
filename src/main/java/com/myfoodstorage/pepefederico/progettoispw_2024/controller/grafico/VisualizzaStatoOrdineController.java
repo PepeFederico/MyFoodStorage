@@ -51,7 +51,7 @@ public class VisualizzaStatoOrdineController implements Initializable {
                 setGrafica();
             }
         }catch (ZeroOrderException e){
-            AlertErrorMessage(e.getMessage());
+            alertErrorMessage(e.getMessage());
         }
     }
 
@@ -88,7 +88,7 @@ public class VisualizzaStatoOrdineController implements Initializable {
         }
     }
 
-    private void AlertErrorMessage(String string){
+    private void alertErrorMessage(String string){
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Ordine Prodotti");
         alert.setContentText(string);

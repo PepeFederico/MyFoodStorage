@@ -1,6 +1,5 @@
 package com.myfoodstorage.pepefederico.progettoispw_2024.controller.grafico;
 
-import com.myfoodstorage.pepefederico.progettoispw_2024.bean.OrdineBean;
 import com.myfoodstorage.pepefederico.progettoispw_2024.bean.ProdottoBean;
 import com.myfoodstorage.pepefederico.progettoispw_2024.controller.grafico.item.ItemProdottoOrdineController;
 import com.myfoodstorage.pepefederico.progettoispw_2024.model.Model;
@@ -44,7 +43,6 @@ public class OrdineProdottiController implements Initializable {
         dispensaSelezionata.setText(ClientController.getInstance().getDispensaBean().getNomeDispensa());
 
         prodotto = ClientController.getInstance().getProdottiBeans();
-        OrdineBean ordineBean = ClientController.getInstance().getOrdineBean();
 
         setGrafica();
     }

@@ -11,7 +11,7 @@ import javafx.scene.control.TextField;
 
 public class ItemCarrelloOrdineController {
     @FXML
-    private Label TipoAnimale;
+    private Label tipoAnimale;
     @FXML
     private Button modificaProdotto;
     @FXML
@@ -24,7 +24,7 @@ public class ItemCarrelloOrdineController {
     public void setItemProdotto(ProdottoOrdineBean prodottoOrdineBean){
         nomeProdotto.setText(prodottoOrdineBean.getNomeProdotto());
         qtaRichiesta.setText(String.valueOf(prodottoOrdineBean.getQtaRichiesta()));
-        TipoAnimale.setText(prodottoOrdineBean.getTipoAnimale().toString());
+        tipoAnimale.setText(prodottoOrdineBean.getTipoAnimale().toString());
 
         modificaProdotto.setOnAction(actionEvent -> modificaProdotto());
         rimuoviProdotto.setOnAction(actionEvent -> rimuoviProdotto());
@@ -40,7 +40,7 @@ public class ItemCarrelloOrdineController {
             }
         }
 
-        AlertMessage("Hai rimosso il prodotto dall'ordine");
+        alertMessage("Hai rimosso il prodotto dall'ordine");
     }
 
     private void modificaProdotto(){
@@ -53,10 +53,10 @@ public class ItemCarrelloOrdineController {
             }
         }
 
-        AlertMessage("Hai modificato la quantità di prodotto richiesta");
+        alertMessage("Hai modificato la quantità di prodotto richiesta");
     }
 
-    private void AlertMessage(String string){
+    private void alertMessage(String string){
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Ordine Prodotti");
         alert.setContentText(string);

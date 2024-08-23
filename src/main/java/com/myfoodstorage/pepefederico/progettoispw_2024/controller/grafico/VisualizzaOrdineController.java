@@ -53,12 +53,12 @@ public class VisualizzaOrdineController implements Initializable {
                 ordineProdotti = new OrdineProdottiControllerA(ClientController.getInstance().getSessioneUtente());
                 if (ordineProdotti.checkSessione()) ordineProdotti.procediOrdine(ordineBean);
             } else {
-                AlertMessage("L'ordine è vuoto !! Inserisci almeno un prodotto");
+                alertMessage("L'ordine è vuoto !! Inserisci almeno un prodotto");
             }
-            AlertMessage("Ordine inoltrato al Fornitore con successo !!");
+            alertMessage("Ordine inoltrato al Fornitore con successo !!");
             backToRicercaProdotti();
         }catch (FailSendMail e){
-            AlertErrorMessage(e.getMessage());
+            alertErrorMessage(e.getMessage());
             backToRicercaProdotti();
         }
     }
@@ -103,14 +103,14 @@ public class VisualizzaOrdineController implements Initializable {
         }
     }
 
-    private void AlertMessage(String string){
+    private void alertMessage(String string){
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Ordine Prodotti");
         alert.setContentText(string);
         alert.showAndWait();
     }
 
-    private void AlertErrorMessage(String string){
+    private void alertErrorMessage(String string){
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Ordine Prodotti");
         alert.setContentText(string);

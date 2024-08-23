@@ -17,7 +17,7 @@
                <Insets right="10.0" />
             </HBox.margin>
          </Label>
-         <Label fx:id="TipoAnimale" text="Vitella">
+         <Label fx:id="tipoAnimale" text="Vitella">
             <HBox.margin>
                <Insets right="10.0" />
             </HBox.margin>

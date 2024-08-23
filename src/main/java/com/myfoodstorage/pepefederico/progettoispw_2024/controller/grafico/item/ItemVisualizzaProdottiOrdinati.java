@@ -7,7 +7,7 @@ import javafx.scene.control.Label;
 public class ItemVisualizzaProdottiOrdinati {
 
     @FXML
-    private Label TipoAnimale;
+    private Label tipoAnimale;
     @FXML
     private Label nomeProdotto;
     @FXML
@@ -15,7 +15,7 @@ public class ItemVisualizzaProdottiOrdinati {
 
     public void setInfoProdottiOrdinati(ProdottoOrdineBean prodottoOrdineBean) {
         nomeProdotto.setText(prodottoOrdineBean.getNomeProdotto());
-        TipoAnimale.setText(String.valueOf(prodottoOrdineBean.getTipoAnimale()));
+        tipoAnimale.setText(String.valueOf(prodottoOrdineBean.getTipoAnimale()));
         qtaRichiesta.setText(String.valueOf(prodottoOrdineBean.getQtaRichiesta()));
     }
 
