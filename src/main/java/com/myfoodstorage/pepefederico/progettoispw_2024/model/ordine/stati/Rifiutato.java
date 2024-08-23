@@ -9,8 +9,7 @@ import java.util.ArrayList;
 
 public class Rifiutato implements Stato {
 
-    private Ordine ordine;
-    private String stato = "Rifiutato";
+    private final Ordine ordine;
 
     public Rifiutato(Ordine ordine) {
         this.ordine = ordine;
@@ -27,7 +26,7 @@ public class Rifiutato implements Stato {
             ordine.getProdottiSelezionati().add(prodotto);
         }
         ordine.setDataCorrente();
-        ordine.setStatoCorrente(this.stato);
+        ordine.setStatoCorrente("Rifiutato");
     }
 
     @Override

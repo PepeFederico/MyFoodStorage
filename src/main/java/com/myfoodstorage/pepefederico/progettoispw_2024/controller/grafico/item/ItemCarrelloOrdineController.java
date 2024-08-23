@@ -36,6 +36,7 @@ public class ItemCarrelloOrdineController {
         for(int i = 0; i < ordineBean.getProdotti().size(); i++){
             if(nomeProdotto.getText().equals(ordineBean.getProdotti().get(i).getNomeProdotto())){
                 ordineBean.getProdotti().remove(i);
+                i--;
             }
         }
 

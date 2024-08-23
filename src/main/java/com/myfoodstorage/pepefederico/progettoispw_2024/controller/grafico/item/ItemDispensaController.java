@@ -11,7 +11,7 @@ public class ItemDispensaController {
     private Label nomeDispensa;
     @FXML
     private ImageView iconaDispensa;
-    private DispensaBean dispensaBean = new DispensaBean();
+    private final DispensaBean dispensaBean = new DispensaBean();
 
     public void setItemDispensa(DispensaBean dispensa){
         nomeDispensa.setText(dispensa.getNomeDispensa());

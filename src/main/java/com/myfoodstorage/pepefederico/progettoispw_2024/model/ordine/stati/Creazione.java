@@ -1,6 +1,5 @@
 package com.myfoodstorage.pepefederico.progettoispw_2024.model.ordine.stati;
 
-import com.myfoodstorage.pepefederico.progettoispw_2024.dao.OrdineDAO;
 import com.myfoodstorage.pepefederico.progettoispw_2024.model.Prodotto;
 import com.myfoodstorage.pepefederico.progettoispw_2024.model.ProdottoFornito;
 import com.myfoodstorage.pepefederico.progettoispw_2024.model.ordine.Ordine;
@@ -8,8 +7,7 @@ import com.myfoodstorage.pepefederico.progettoispw_2024.model.ordine.Stato;
 import java.util.ArrayList;
 
 public class Creazione implements Stato {
-    Ordine ordine;
-    private final String stato = "Creazione";
+    private final Ordine ordine;
 
     public Creazione(Ordine ordine) {
         this.ordine = ordine;
@@ -26,7 +24,7 @@ public class Creazione implements Stato {
             ordine.getProdottiSelezionati().add(prodotto);
         }
         ordine.setDataCorrente();
-        ordine.setStatoCorrente(this.stato);
+        ordine.setStatoCorrente("Creazione");
 
 
         ordine.setStati(ordine.getCheckinOut());

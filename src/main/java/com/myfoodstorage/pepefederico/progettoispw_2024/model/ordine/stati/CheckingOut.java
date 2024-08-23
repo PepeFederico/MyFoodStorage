@@ -10,7 +10,7 @@ import com.myfoodstorage.pepefederico.progettoispw_2024.model.ordine.Stato;
 import java.util.ArrayList;
 
 public class CheckingOut implements Stato {
-    private Ordine ordine;
+    private final Ordine ordine;
 
     public CheckingOut(Ordine ordine) {
         this.ordine = ordine;

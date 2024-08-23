@@ -3,7 +3,7 @@ package com.myfoodstorage.pepefederico.progettoispw_2024.bean;
 import java.util.ArrayList;
 
 public class OrdineBean {
-    private ArrayList<ProdottoOrdineBean> prodotti;
+    private final ArrayList<ProdottoOrdineBean> prodotti;
     private String contattoFornitore;
     private String nomeFornitore;
     private String statoOrdine;

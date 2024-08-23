@@ -7,8 +7,8 @@ import com.myfoodstorage.pepefederico.progettoispw_2024.model.ordine.Stato;
 import java.util.ArrayList;
 
 public class Attesa implements Stato {
-    private Ordine ordine;
-    private String stato = "Attesa";
+    private final Ordine ordine;
+
     public Attesa(Ordine ordine) {
         this.ordine = ordine;
     }
@@ -24,7 +24,7 @@ public class Attesa implements Stato {
             ordine.getProdottiSelezionati().add(prodotto);
         }
         ordine.setDataCorrente();
-        ordine.setStatoCorrente(this.stato);
+        ordine.setStatoCorrente("Attesa");
     }
 
     @Override

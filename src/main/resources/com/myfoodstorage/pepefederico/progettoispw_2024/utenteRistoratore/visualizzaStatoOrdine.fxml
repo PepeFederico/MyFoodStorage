@@ -22,7 +22,6 @@
       </GridPane>
     </ScrollPane>
       <HBox alignment="CENTER">
-         <children>
           <Button fx:id="backToRicercaProdotti" alignment="CENTER" mnemonicParsing="false" styleClass="menu_container" stylesheets="@../../../../../style/dashboard.css" text="Indietro">
              <graphic>
                 <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
@@ -36,16 +35,13 @@
             <Button fx:id="aggiornaStatoOrdini" mnemonicParsing="false" styleClass="menu_container" stylesheets="@../../../../../style/dashboard.css" text="Aggiorna">
                <graphic>
                   <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
                         <Image url="@../../../../../image/loading-arrow.png" />
-                     </image>
                   </ImageView>
                </graphic>
                <HBox.margin>
                   <Insets left="15.0" />
                </HBox.margin>
             </Button>
-         </children>
       </HBox>
   </VBox>
 

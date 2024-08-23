@@ -27,10 +27,8 @@
            </Label>
          </HBox>
       <HBox alignment="CENTER">
-         <children>
             <Label fx:id="labelConsegna" text="Consegna : " />
             <Label fx:id="dataConsegna" />
-         </children>
       </HBox>
          <HBox alignment="CENTER" prefHeight="80.0" prefWidth="750.0">
                <Label fx:id="versoFornitore" />
