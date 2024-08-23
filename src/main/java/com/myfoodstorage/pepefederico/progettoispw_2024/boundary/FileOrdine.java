@@ -1,15 +1,18 @@
 package com.myfoodstorage.pepefederico.progettoispw_2024.boundary;
 
 import com.myfoodstorage.pepefederico.progettoispw_2024.bean.OrdineBean;
-
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class FileOrdine {
 
     private File file;
+    private static final String ACTION = "Context error";
+    private final Logger logger = Logger.getLogger(FileOrdine.class.getName());
 
     public void creaFileOrdine(OrdineBean ordineBean){
         try {
@@ -36,6 +39,8 @@ public class FileOrdine {
     }
 
     public void eliminaFile(){
-        this.file.delete();
+        if(!this.file.delete()){
+            logger.log(Level.SEVERE, ACTION, "Errore !!");
+        }
     }
 }

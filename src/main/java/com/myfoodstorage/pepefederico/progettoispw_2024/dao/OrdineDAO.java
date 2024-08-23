@@ -76,11 +76,15 @@ public class OrdineDAO {
             StringTokenizer obj = new StringTokenizer(line, " ");
 
             while(obj.hasMoreTokens()){
-                stato = switch (obj.nextToken()) {
-                    case "Rifiutato"    -> obj.nextToken();
-                    case "Accettato"    -> obj.nextToken();
-                    default             -> obj.nextToken();
-                };
+
+                if(obj.nextToken().equals("Rifiutato")){
+                    stato = obj.nextToken();
+                } else if(obj.nextToken().equals("Accettato")){
+                    stato = obj.nextToken();
+                } else if(obj.nextToken().equals("Attesa")){
+                    stato = obj.nextToken();
+                }
+
             }
             bufferedReader.close();
             file.close();
