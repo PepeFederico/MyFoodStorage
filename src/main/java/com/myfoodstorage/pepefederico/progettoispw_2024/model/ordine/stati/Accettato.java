@@ -32,6 +32,8 @@ public class Accettato implements Stato {
 
     @Override
     public void inoltraOrdine() {
-
+        /*
+            Metodo è vuoto poichè non ha senso per lo stato in questione
+         */
     }
 }

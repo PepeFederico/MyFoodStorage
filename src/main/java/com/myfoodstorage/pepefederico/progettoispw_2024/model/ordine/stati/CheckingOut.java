@@ -26,7 +26,10 @@ public class CheckingOut implements Stato {
 
     @Override
     public void creaOrdine(ArrayList<Prodotto> prodotti) {
-
+        /*
+            Metodo è vuoto poichè, non è responsabilità di questo stato
+            per la classe in questione
+         */
     }
 
     @Override
