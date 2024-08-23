@@ -44,6 +44,8 @@ public class ItemProdottoController {
                     case Tacchino:
                         iconaProdotto.setImage(new Image(String.valueOf(getClass().getResource("/image/imageProdotti/turkey.png"))));
                         break;
+                    default:
+                        iconaProdotto.setImage(new Image(String.valueOf(getClass().getResource("/image/diet.png"))));
                 }
             break;
 
@@ -52,9 +54,13 @@ public class ItemProdottoController {
                     case Salmone:
                         iconaProdotto.setImage(new Image(String.valueOf(getClass().getResource("/image/imageProdotti/fish.png"))));
                         break;
+
                     case Tonno:
                         iconaProdotto.setImage(new Image(String.valueOf(getClass().getResource("/image/imageProdotti/tuna.png"))));
                         break;
+
+                    default:
+                        iconaProdotto.setImage(new Image(String.valueOf(getClass().getResource("/image/diet.png"))));
                 }
             break;
 

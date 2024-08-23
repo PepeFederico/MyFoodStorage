@@ -51,6 +51,8 @@ public class ItemProdottoOrdineController {
                     case Tacchino:
                         iconaProdotto.setImage(new Image(String.valueOf(getClass().getResource("/image/imageProdotti/turkey.png"))));
                         break;
+                    default:
+                        iconaProdotto.setImage(new Image(String.valueOf(getClass().getResource("/image/diet.png"))));
                 }
             break;
 
@@ -62,6 +64,8 @@ public class ItemProdottoOrdineController {
                     case Tonno:
                         iconaProdotto.setImage(new Image(String.valueOf(getClass().getResource("/image/imageProdotti/tuna.png"))));
                         break;
+                    default:
+                        iconaProdotto.setImage(new Image(String.valueOf(getClass().getResource("/image/diet.png"))));
                 }
             break;
 

@@ -19,7 +19,7 @@ public class DispenseUtente {
 
     public void setLogoutDispenseUtente() {
         this.dispense = null;
-        DispenseUtente.dispenseUtente = null;
+        dispenseUtente = null;
     }
     public ArrayList<Dispensa> getDispense() {
         return dispense;

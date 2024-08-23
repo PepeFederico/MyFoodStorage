@@ -81,7 +81,7 @@ public class OrdineDAO {
                     stato = obj.nextToken();
                 } else if(obj.nextToken().equals("Accettato")){
                     stato = obj.nextToken();
-                } else if(obj.nextToken().equals("Attesa")){
+                } else {
                     stato = obj.nextToken();
                 }
 
