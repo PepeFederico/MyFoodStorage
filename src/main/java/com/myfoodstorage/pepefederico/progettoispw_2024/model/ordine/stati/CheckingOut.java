@@ -36,13 +36,4 @@ public class CheckingOut implements Stato {
         ordine.setStati(ordine.getAttesa());
     }
 
-    @Override
-    public void ordineAccettato() {
-
-    }
-
-    @Override
-    public void ordineRifiutato() {
-
-    }
 }

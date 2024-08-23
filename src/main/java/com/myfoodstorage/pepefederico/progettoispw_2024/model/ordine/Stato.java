@@ -8,7 +8,5 @@ public interface Stato {
     ArrayList<ProdottoFornito> elaboraOrdine(String nomeAttivita);
     void creaOrdine(ArrayList<Prodotto> prodotti);
     void inoltraOrdine();
-    void ordineAccettato();
-    void ordineRifiutato();
 
 }

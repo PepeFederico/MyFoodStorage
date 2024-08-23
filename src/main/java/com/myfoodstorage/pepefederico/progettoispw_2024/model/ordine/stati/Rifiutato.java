@@ -33,14 +33,4 @@ public class Rifiutato implements Stato {
     public void inoltraOrdine() {
 
     }
-
-    @Override
-    public void ordineAccettato() {
-
-    }
-
-    @Override
-    public void ordineRifiutato() {
-
-    }
 }

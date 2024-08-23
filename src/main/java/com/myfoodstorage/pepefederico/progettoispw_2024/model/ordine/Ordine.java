@@ -58,9 +58,6 @@ public class Ordine {
         this.contattoFornitore = contattoFornitore;
     }
 
-    public Stato getCreazione() {
-        return creazione;
-    }
     public Stato getCheckinOut() {
         return checkinOut;
     }

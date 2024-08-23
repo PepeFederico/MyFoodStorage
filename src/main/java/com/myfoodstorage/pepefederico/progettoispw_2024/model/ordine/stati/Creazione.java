@@ -35,13 +35,4 @@ public class Creazione implements Stato {
 
     }
 
-    @Override
-    public void ordineAccettato() {
-
-    }
-
-    @Override
-    public void ordineRifiutato() {
-
-    }
 }

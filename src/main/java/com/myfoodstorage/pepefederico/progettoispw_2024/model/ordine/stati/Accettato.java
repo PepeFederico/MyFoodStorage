@@ -34,14 +34,4 @@ public class Accettato implements Stato {
     public void inoltraOrdine() {
 
     }
-
-    @Override
-    public void ordineAccettato() {
-
-    }
-
-    @Override
-    public void ordineRifiutato() {
-
-    }
 }
