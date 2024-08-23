@@ -20,8 +20,6 @@ public class SimpleMail {
     private String password;
     private FileOrdine fileOrdine;
 
-    public SimpleMail() {}
-
     public void sendMail(OrdineBean ordineBean) throws MessagingException {
 
         Properties props = new Properties();
