@@ -18,9 +18,9 @@ import java.util.List;
 
 public class OrdineProdottiControllerA {
     private final SessioneBean sessioneBean;
-    private ArrayList<ProdottoBean> prodBean = new ArrayList<>();
+    private List<ProdottoBean> prodBean = new ArrayList<>();
     private OrdineBean ordineBean;
-    private final ArrayList<OrdineBean> ordiniEffetuati;
+    private final List<OrdineBean> ordiniEffetuati;
 
     public OrdineProdottiControllerA(SessioneBean sessioneBean) {
         this.sessioneBean = sessioneBean;
@@ -65,7 +65,7 @@ public class OrdineProdottiControllerA {
        try {
             setOrdineBean(ordineBean);
             String nomeAttivita = ClientController.getInstance().getSessioneUtente().getUtente().getNomeAttivita();
-           Ordine ordineProdotti = OrdineFactory.getInstance().getOrdine();
+            Ordine ordineProdotti = OrdineFactory.getInstance().getOrdine();
 
             ArrayList<Prodotto> prodotti = new ArrayList<>();
             for(int i = 0; i < ordineBean.getProdotti().size(); i++){
@@ -145,7 +145,7 @@ public class OrdineProdottiControllerA {
     public void setOrdineBean(OrdineBean ordineBean) {
         this.ordineBean = ordineBean;
     }
-    public ArrayList<OrdineBean> getOrdiniEffetuati() {
+    public List<OrdineBean> getOrdiniEffetuati() {
         return ordiniEffetuati;
     }
 }

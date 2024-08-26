@@ -9,12 +9,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,11 +23,9 @@ public class VisualizzaOrdineProdottiController implements Initializable {
     private Button backToStatoOrdine;
     @FXML
     private GridPane gridPane;
-    @FXML
-    private ScrollPane scrollPane;
     private static final String ACTION = "Context error";
     private final Logger logger = Logger.getLogger(VisualizzaOrdineProdottiController.class.getName());
-    private ArrayList<ProdottoOrdineBean> prodotti;
+    private List<ProdottoOrdineBean> prodotti;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         backToStatoOrdine.setOnAction(e -> onBackView());

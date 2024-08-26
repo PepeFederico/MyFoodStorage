@@ -1,9 +1,10 @@
 package com.myfoodstorage.pepefederico.progettoispw_2024.bean;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class OrdineBean {
-    private final ArrayList<ProdottoOrdineBean> prodotti;
+    private final List<ProdottoOrdineBean> prodotti;
     private String contattoFornitore;
     private String nomeFornitore;
     private String statoOrdine;
@@ -13,7 +14,7 @@ public class OrdineBean {
         this.prodotti = new ArrayList<>();
     }
 
-    public ArrayList<ProdottoOrdineBean> getProdotti() {
+    public List<ProdottoOrdineBean> getProdotti() {
         return prodotti;
     }
     public void setProdotti(ProdottoOrdineBean prodotti) {

@@ -6,7 +6,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import java.net.URL;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class ClientController implements Initializable {
@@ -15,7 +15,7 @@ public class ClientController implements Initializable {
     private DispensaBean dispensaBean;
     private CategoriaBean categoriaBean;
     private OrdineBean ordineBean;
-    private ArrayList<ProdottoBean> prodottiBeans;
+    private List<ProdottoBean> prodottiBeans;
     private static ClientController clientController;
 
     private ClientController() {}
@@ -92,10 +92,10 @@ public class ClientController implements Initializable {
     public void backToCategoriaView(){
         clientParent.setCenter(Model.getInstance().getViewFactory().getCategoriaView());
     }
-    public ArrayList<ProdottoBean> getProdottiBeans() {
+    public List<ProdottoBean> getProdottiBeans() {
         return prodottiBeans;
     }
-    public void setProdottiBeans(ArrayList<ProdottoBean> prodottiBeans) {
+    public void setProdottiBeans(List<ProdottoBean> prodottiBeans) {
         this.prodottiBeans = prodottiBeans;
     }
     public void backToRicercaOrdineProdottiView(){
@@ -122,7 +122,6 @@ public class ClientController implements Initializable {
     public void setClientParentProdottiOrdinati(){
         clientParent.setCenter(Model.getInstance().getViewFactory().getVisualizzaProdottiOrdinatiView());
     }
-
     public void backToStatoOrdiniView(){
         clientParent.setCenter(Model.getInstance().getViewFactory().getVisualizzaOrdiniView());
     }

@@ -7,7 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -15,7 +15,6 @@ import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 
@@ -25,15 +24,13 @@ public class OrdineProdottiController implements Initializable {
     @FXML
     private GridPane gridPane;
     @FXML
-    private ScrollPane scrollPane;
-    @FXML
     private Button visualizzaCarrello;
     @FXML
     private Button backToRicercaProdotti;
 
     private static final String ACTION = "Context error";
     private final Logger logger = Logger.getLogger(OrdineProdottiController.class.getName());
-    private ArrayList<ProdottoBean> prodotto;
+    private List<ProdottoBean> prodotto;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
