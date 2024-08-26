@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.time.LocalDateTime;
 import java.util.Properties;
+import java.util.concurrent.RejectedExecutionException;
 
 public class Sessione {
     private int idSessione;
@@ -49,7 +50,7 @@ public class Sessione {
             properties.load(input);
             return Integer.parseInt(properties.getProperty("BOUND"));
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RejectedExecutionException(e);
         }
     }
 }

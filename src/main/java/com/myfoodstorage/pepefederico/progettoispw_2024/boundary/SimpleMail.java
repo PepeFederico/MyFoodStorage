@@ -6,6 +6,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
+import java.util.concurrent.RejectedExecutionException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.mail.Authenticator;
@@ -38,7 +39,7 @@ public class SimpleMail {
             password = properties.getProperty("MY_PASS_EMAIL");
 
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RejectedExecutionException(e);
         }
 
         Session session = Session.getInstance(props, new Authenticator() {

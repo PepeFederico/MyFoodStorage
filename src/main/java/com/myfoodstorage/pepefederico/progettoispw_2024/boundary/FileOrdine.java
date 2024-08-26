@@ -4,6 +4,7 @@ import com.myfoodstorage.pepefederico.progettoispw_2024.bean.OrdineBean;
 
 import java.io.*;
 import java.util.Properties;
+import java.util.concurrent.RejectedExecutionException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -25,7 +26,7 @@ public class FileOrdine {
             bufferedWriter.close();
             fileOrdine.close();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RejectedExecutionException(e);
         }
 
     }

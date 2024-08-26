@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
+import java.util.concurrent.RejectedExecutionException;
 
 public class ConnectionFactory {
     private static final Connection connection;
@@ -23,7 +24,7 @@ public class ConnectionFactory {
 
             connection = DriverManager.getConnection(connectionUrl,user,password);
         } catch (IOException | SQLException e) {
-            throw new RuntimeException(e);
+            throw new RejectedExecutionException(e);
         }
     }
 

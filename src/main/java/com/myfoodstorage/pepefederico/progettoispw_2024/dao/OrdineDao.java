@@ -30,7 +30,7 @@ public class OrdineDao {
             bufferedWriter.close();
             fileOrdine.close();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RejectedExecutionException(e);
         }
     }
 
@@ -91,7 +91,7 @@ public class OrdineDao {
             return line;
 
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RejectedExecutionException(e);
         }
     }
 
