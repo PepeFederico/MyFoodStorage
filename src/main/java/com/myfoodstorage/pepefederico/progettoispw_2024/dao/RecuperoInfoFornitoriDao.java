@@ -14,6 +14,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+import java.util.concurrent.RejectedExecutionException;
 
 public class RecuperoInfoFornitoriDao {
 
@@ -45,7 +46,7 @@ public class RecuperoInfoFornitoriDao {
                 }while(rs.next());
             }
         } catch (SQLException | IOException e) {
-            throw new RuntimeException(e);
+            throw new RejectedExecutionException(e);
         }
     }
     

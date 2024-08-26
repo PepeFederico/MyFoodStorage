@@ -16,6 +16,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+import java.util.concurrent.RejectedExecutionException;
 
 public class ProdottoDao {
     private final List<Prodotto> prodotti = new ArrayList<>();
@@ -38,7 +39,7 @@ public class ProdottoDao {
                 throw new ProductNotFoundException("Ops, come è vuota la tua dispensa. Inserisci qualche prodotto");
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new RejectedExecutionException(e);
         } catch (SearchException e){
             throw new SearchException("Campi non corrispondono alle dispense memorizzate");
         }
@@ -62,7 +63,7 @@ public class ProdottoDao {
                 throw new SearchException("Campi non corrispondono alle dispense memorizzate");
             }
         } catch (SQLException | IOException e) {
-            throw new RuntimeException(e);
+            throw new RejectedExecutionException(e);
         }
         return rs;
     }

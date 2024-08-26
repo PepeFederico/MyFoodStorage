@@ -10,6 +10,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+import java.util.concurrent.RejectedExecutionException;
+
 import com.myfoodstorage.pepefederico.progettoispw_2024.exceptions.FoodStorageNotFoundException;
 import com.myfoodstorage.pepefederico.progettoispw_2024.factory.ConnectionFactory;
 import com.myfoodstorage.pepefederico.progettoispw_2024.factory.DispensaFactory;
@@ -39,7 +41,7 @@ public class DispensaDao {
             }
 
         } catch (IOException | SQLException e) {
-            throw new RuntimeException(e);
+            throw new RejectedExecutionException(e);
         }
 
     }

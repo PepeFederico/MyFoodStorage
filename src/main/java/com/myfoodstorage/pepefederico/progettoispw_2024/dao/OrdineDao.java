@@ -8,6 +8,7 @@ import com.myfoodstorage.pepefederico.progettoispw_2024.model.TipoAnimale;
 import com.myfoodstorage.pepefederico.progettoispw_2024.model.ordine.Ordine;
 import java.io.*;
 import java.util.*;
+import java.util.concurrent.RejectedExecutionException;
 
 public class OrdineDao {
     private int countOrdini = 0;
@@ -75,7 +76,7 @@ public class OrdineDao {
             bufferedReader.close();
             file.close();
         }catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RejectedExecutionException(e);
         }
     }
 
@@ -134,7 +135,7 @@ public class OrdineDao {
             bufferedReader.close();
             file.close();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RejectedExecutionException(e);
         }
     }
 
@@ -177,7 +178,7 @@ public class OrdineDao {
             directoryName = new File(properties.getProperty("DIRECTORY_NAME"));
 
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RejectedExecutionException(e);
         }
     }
 

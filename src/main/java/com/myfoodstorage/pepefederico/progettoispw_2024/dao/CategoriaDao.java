@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+import java.util.concurrent.RejectedExecutionException;
 
 public class CategoriaDao {
     private final List<Categoria> categoria = new ArrayList<>();
@@ -38,7 +39,7 @@ public class CategoriaDao {
             }
 
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new RejectedExecutionException(e);
         }
 
     }

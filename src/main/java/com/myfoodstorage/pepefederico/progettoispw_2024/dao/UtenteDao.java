@@ -12,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
+import java.util.concurrent.RejectedExecutionException;
 
 public class UtenteDao {
     private Utente utenteLoggato;
@@ -34,7 +35,7 @@ public class UtenteDao {
                     rs.getString("telefono")
             );
         }catch(SQLException e){
-            throw new RuntimeException(e);
+            throw new RejectedExecutionException(e);
         }
     }
 
@@ -52,7 +53,7 @@ public class UtenteDao {
             rs = query.executeQuery();
 
         }catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RejectedExecutionException(e);
         }
         if(!rs.next()){
             throw new UserNotFoundException("Errore: Credenziali non valide");
