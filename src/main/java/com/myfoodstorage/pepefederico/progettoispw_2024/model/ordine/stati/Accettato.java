@@ -6,6 +6,8 @@ import com.myfoodstorage.pepefederico.progettoispw_2024.model.ordine.Ordine;
 import com.myfoodstorage.pepefederico.progettoispw_2024.model.ordine.Stato;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class Accettato implements Stato {
 
@@ -16,8 +18,8 @@ public class Accettato implements Stato {
     }
 
     @Override
-    public ArrayList<ProdottoFornito> elaboraOrdine(String nomeAttivita) {
-        return null;
+    public List<ProdottoFornito> elaboraOrdine(String nomeAttivita) {
+        return Collections.emptyList();
     }
 
     @Override

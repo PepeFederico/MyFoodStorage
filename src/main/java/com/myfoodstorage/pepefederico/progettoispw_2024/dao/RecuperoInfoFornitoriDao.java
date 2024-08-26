@@ -12,11 +12,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 public class RecuperoInfoFornitoriDao {
 
-    private final ArrayList<ProdottoFornito> prodottiForniti = new ArrayList<>();
+    private final List<ProdottoFornito> prodottiForniti = new ArrayList<>();
     private String nomeFornitore;
 
     public void recuperoFornitori(String nomeAttivita){
@@ -48,9 +49,10 @@ public class RecuperoInfoFornitoriDao {
         }
     }
     
-    public ArrayList<ProdottoFornito> getProdotti() {
+    public List<ProdottoFornito> getProdotti() {
         return prodottiForniti;
     }
+
     public String getNomeFornitore() {
         return nomeFornitore;
     }

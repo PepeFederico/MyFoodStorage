@@ -7,15 +7,12 @@ import com.myfoodstorage.pepefederico.progettoispw_2024.model.Prodotto;
 import com.myfoodstorage.pepefederico.progettoispw_2024.model.TipoAnimale;
 import com.myfoodstorage.pepefederico.progettoispw_2024.model.ordine.Ordine;
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Objects;
-import java.util.Properties;
-import java.util.StringTokenizer;
+import java.util.*;
 
 public class OrdineDao {
     private int countOrdini = 0;
     private File directoryName;
-    private ArrayList<Ordine> ordine;
+    private List<Ordine> ordine;
     private ArrayList<Prodotto> listaOrdine;
 
     public void salvaOrdine(Ordine ordine, String stato, String nomeFornitore){
@@ -184,7 +181,7 @@ public class OrdineDao {
         }
     }
 
-    public ArrayList<Ordine> getOrdine() {
+    public List<Ordine> getOrdine() {
         return ordine;
     }
 }

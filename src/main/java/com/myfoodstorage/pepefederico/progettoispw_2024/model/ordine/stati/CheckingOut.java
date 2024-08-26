@@ -8,6 +8,7 @@ import com.myfoodstorage.pepefederico.progettoispw_2024.model.ordine.Ordine;
 import com.myfoodstorage.pepefederico.progettoispw_2024.model.ordine.Stato;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class CheckingOut implements Stato {
     private final Ordine ordine;
@@ -17,7 +18,7 @@ public class CheckingOut implements Stato {
     }
 
     @Override
-    public ArrayList<ProdottoFornito> elaboraOrdine(String nomeAttivita) {
+    public List<ProdottoFornito> elaboraOrdine(String nomeAttivita) {
         RecuperoInfoFornitoriDao infoFornitori = new RecuperoInfoFornitoriDao();
         infoFornitori.recuperoFornitori(nomeAttivita);
         ordine.setNomeFornitore(infoFornitori.getNomeFornitore());

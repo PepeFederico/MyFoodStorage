@@ -15,7 +15,7 @@ public class Ordine {
     private final Stato attesa;
     private Stato stato;
 
-    private final ArrayList<Prodotto> prodottiSelezionati;
+    private final List<Prodotto> prodottiSelezionati;
     private String contattoFornitore;
     private String nomeFornitore;
     private Date dataOrdine;
@@ -40,7 +40,7 @@ public class Ordine {
         this.stato.creaOrdine(prodotti);
     }
 
-    public ArrayList<ProdottoFornito> elaboraOrdine(String nomeAttivita){
+    public List<ProdottoFornito> elaboraOrdine(String nomeAttivita){
         return this.stato.elaboraOrdine(nomeAttivita);
     }
 
@@ -48,7 +48,7 @@ public class Ordine {
         this.stato.inoltraOrdine();
     }
 
-    public ArrayList<Prodotto> getProdottiSelezionati() {
+    public List<Prodotto> getProdottiSelezionati() {
         return this.prodottiSelezionati;
     }
     public String getContattoFornitore() {

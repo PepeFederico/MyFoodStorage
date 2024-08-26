@@ -14,6 +14,7 @@ import com.myfoodstorage.pepefederico.progettoispw_2024.model.*;
 import com.myfoodstorage.pepefederico.progettoispw_2024.model.ordine.Ordine;
 import javax.mail.MessagingException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class OrdineProdottiControllerA {
     private final SessioneBean sessioneBean;
@@ -75,7 +76,7 @@ public class OrdineProdottiControllerA {
             }
             ordineProdotti.creaOrdine(prodotti);
 
-           ArrayList<ProdottoFornito> prodottiForniti = ordineProdotti.elaboraOrdine(nomeAttivita);
+           List<ProdottoFornito> prodottiForniti = ordineProdotti.elaboraOrdine(nomeAttivita);
             for(int i = 0; i < ordineBean.getProdotti().size(); i++){
                 for (ProdottoFornito prodottoFornito : prodottiForniti) {
                     if (ordineBean.getProdotti().get(i).getNomeProdotto().equals(prodottoFornito.getNomeProdotto())) {
@@ -102,7 +103,7 @@ public class OrdineProdottiControllerA {
             OrdineDao ordineDAO = new OrdineDao();
             ordineDAO.recuperaInfoOrdini();
 
-            ArrayList<Ordine> ordini = ordineDAO.getOrdine();
+            List<Ordine> ordini = ordineDAO.getOrdine();
 
             for (Ordine ordine : ordini) {
                 OrdineBean ordBean = new OrdineBean();
