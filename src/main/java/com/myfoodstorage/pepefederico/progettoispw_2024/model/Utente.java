@@ -6,15 +6,36 @@ public abstract class Utente {
     protected String password;
     protected String nome;
     protected String cognome;
+    protected String partitaIva;
+    protected String viaAttivita;
+    protected int numeroCivico;
+    protected String citta;
+    protected String cap;
+    protected String nomeAttivita;
+    protected String numeroTelefono;
 
     protected Utente(String email,
                      String password,
                      String nome,
-                     String cognome) {
+                     String cognome,
+                     String partitaIva,
+                     String viaAttivita,
+                     int numeroCivico,
+                     String citta,
+                     String cap,
+                     String nomeAttivita,
+                     String numeroTelefono) {
         this.email = email;
         this.password = password;
         this.nome = nome;
         this.cognome = cognome;
+        this.partitaIva = partitaIva;
+        this.viaAttivita = viaAttivita;
+        this.numeroCivico = numeroCivico;
+        this.citta = citta;
+        this.cap = cap;
+        this.nomeAttivita = nomeAttivita;
+        this.numeroTelefono = numeroTelefono;
     }
     public String getTipoUtente() {
         return tipoUtente;
@@ -56,4 +77,59 @@ public abstract class Utente {
         this.cognome = cognome;
     }
 
+    public String getPartitaIva() {
+        return partitaIva;
+    }
+
+    public void setPartitaIva(String partitaIva) {
+        this.partitaIva = partitaIva;
+    }
+
+    public String getViaAttivita() {
+        return viaAttivita;
+    }
+
+    public void setViaAttivita(String viaAttivita) {
+        this.viaAttivita = viaAttivita;
+    }
+
+    public int getNumeroCivico() {
+        return numeroCivico;
+    }
+
+    public void setNumeroCivico(int numeroCivico) {
+        this.numeroCivico = numeroCivico;
+    }
+
+    public String getCitta() {
+        return citta;
+    }
+
+    public void setCitta(String citta) {
+        this.citta = citta;
+    }
+
+    public String getCap() {
+        return cap;
+    }
+
+    public void setCap(String cap) {
+        this.cap = cap;
+    }
+
+    public String getNomeAttivita() {
+        return nomeAttivita;
+    }
+
+    public void setNomeAttivita(String nomeAttivita) {
+        this.nomeAttivita = nomeAttivita;
+    }
+
+    public String getNumeroTelefono() {
+        return numeroTelefono;
+    }
+
+    public void setNumeroTelefono(String numeroTelefono) {
+        this.numeroTelefono = numeroTelefono;
+    }
 }

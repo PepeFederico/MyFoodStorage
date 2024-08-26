@@ -26,10 +26,10 @@ public class LoginControllerA {
             Utente utenteLoggato = utenteDAO.getUtenteLoggato();
             Sessione sessioneUtente = com.myfoodstorage.pepefederico.progettoispw_2024.factory.SessionFactory.getInstance().getSessione(utenteLoggato);
 
+            fillUtenteBean(utenteLoggato);
             SessioneBean sessioneBean = new SessioneBean(sessioneUtente.getIdSessione(), sessioneUtente.getData(), utenteBean, sessioneUtente.isStatusSessione());
 
             if(utenteLoggato.getTipoUtente().equals("Ristoratore")){
-                fillUtenteBean((Ristoratore) utenteLoggato);
                 Model.getInstance().addSessioneUtenteRistoratore(sessioneUtente);
                 Model.getInstance().getViewFactory().showRistoratoreWindow(sessioneBean);
             }
@@ -42,7 +42,7 @@ public class LoginControllerA {
         Model.getInstance().removeSessioneUtenteRistoratore(sessione.getIdSessione());
         DispenseUtente.getInstance().setLogoutDispenseUtente();
     }
-    private void fillUtenteBean(Ristoratore utente){
+    private void fillUtenteBean(Utente utente){
         utenteBean.setNome(utente.getNome());
         utenteBean.setCognome(utente.getCognome());
         utenteBean.setEmail(utente.getEmail());
