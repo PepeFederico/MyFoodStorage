@@ -1,10 +1,9 @@
 package com.myfoodstorage.pepefederico.progettoispw_2024.boundary;
 
 import com.myfoodstorage.pepefederico.progettoispw_2024.bean.OrdineBean;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+
+import java.io.*;
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -16,26 +15,35 @@ public class FileOrdine {
 
     public void creaFileOrdine(OrdineBean ordineBean){
         try {
-            file = new File("D:\\ProgrammiJava\\progettoISPW_2024\\ordini\\ordine.txt");
+            InputStream input = new FileInputStream("risorseDB/pathFileOrdine.properties");
+            Properties properties = new Properties();
+            properties.load(input);
+
+            file = new File(properties.getProperty("FILE_ORDINE"));
             FileWriter fileOrdine = new FileWriter(file);
-            BufferedWriter bufferedWriter = new BufferedWriter(fileOrdine);
-
-            for (int i = 0; i < ordineBean.getProdotti().size(); i++) {
-                bufferedWriter.write(ordineBean.getProdotti().get(i).getNomeProdotto());
-                bufferedWriter.write(" ");
-
-                bufferedWriter.write(String.valueOf(ordineBean.getProdotti().get(i).getTipoAnimale()));
-                bufferedWriter.write(" ");
-
-                bufferedWriter.write(String.valueOf(ordineBean.getProdotti().get(i).getQtaRichiesta()));
-                bufferedWriter.write("KG\n");
-            }
+            BufferedWriter bufferedWriter = getBufferedWriter(ordineBean, fileOrdine);
             bufferedWriter.close();
             fileOrdine.close();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
+    }
+
+    private BufferedWriter getBufferedWriter(OrdineBean ordineBean, FileWriter fileOrdine) throws IOException {
+        BufferedWriter bufferedWriter = new BufferedWriter(fileOrdine);
+
+        for (int i = 0; i < ordineBean.getProdotti().size(); i++) {
+            bufferedWriter.write(ordineBean.getProdotti().get(i).getNomeProdotto());
+            bufferedWriter.write(" ");
+
+            bufferedWriter.write(String.valueOf(ordineBean.getProdotti().get(i).getTipoAnimale()));
+            bufferedWriter.write(" ");
+
+            bufferedWriter.write(String.valueOf(ordineBean.getProdotti().get(i).getQtaRichiesta()));
+            bufferedWriter.write("KG\n");
+        }
+        return bufferedWriter;
     }
 
     public void eliminaFile(){

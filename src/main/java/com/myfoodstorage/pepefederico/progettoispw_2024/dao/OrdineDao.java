@@ -9,16 +9,18 @@ import com.myfoodstorage.pepefederico.progettoispw_2024.model.ordine.Ordine;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.Properties;
 import java.util.StringTokenizer;
 
 public class OrdineDao {
     private int countOrdini = 0;
-    private final File directoryName = new File("D:\\ProgrammiJava\\progettoISPW_2024\\ordineProdotti");
+    private File directoryName;
     private ArrayList<Ordine> ordine;
     private ArrayList<Prodotto> listaOrdine;
 
     public void salvaOrdine(Ordine ordine, String stato, String nomeFornitore){
         try {
+            setDirectoryName();
             String fileName = nomeOrdine();
             String pathName = "D:\\ProgrammiJava\\progettoISPW_2024\\ordineProdotti\\"+fileName;
 
@@ -35,6 +37,7 @@ public class OrdineDao {
     }
 
     public void recuperaInfoOrdini() throws ZeroOrderException {
+        setDirectoryName();
         countFile();
 
         if(this.countOrdini == 0)
@@ -163,9 +166,24 @@ public class OrdineDao {
         countFile();
         return "ordine_"+ this.countOrdini+".txt";
     }
+
     private void countFile(){
         this.countOrdini = Objects.requireNonNull(directoryName.list()).length;
     }
+
+    private void setDirectoryName(){
+        try{
+
+            InputStream input = new FileInputStream("risorseDB/pathFileOrdine.properties");
+            Properties properties = new Properties();
+            properties.load(input);
+            directoryName = new File(properties.getProperty("DIRECTORY_NAME"));
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public ArrayList<Ordine> getOrdine() {
         return ordine;
     }
