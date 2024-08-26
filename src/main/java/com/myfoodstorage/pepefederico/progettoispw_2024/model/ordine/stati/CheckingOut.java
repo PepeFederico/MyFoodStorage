@@ -6,8 +6,6 @@ import com.myfoodstorage.pepefederico.progettoispw_2024.model.Prodotto;
 import com.myfoodstorage.pepefederico.progettoispw_2024.model.ProdottoFornito;
 import com.myfoodstorage.pepefederico.progettoispw_2024.model.ordine.Ordine;
 import com.myfoodstorage.pepefederico.progettoispw_2024.model.ordine.Stato;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class CheckingOut implements Stato {
@@ -26,7 +24,7 @@ public class CheckingOut implements Stato {
     }
 
     @Override
-    public void creaOrdine(ArrayList<Prodotto> prodotti) {
+    public void creaOrdine(List<Prodotto> prodotti) {
         /*
             Metodo è vuoto poichè, non è responsabilità di questo stato
             per la classe in questione

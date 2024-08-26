@@ -3,12 +3,10 @@ package com.myfoodstorage.pepefederico.progettoispw_2024.model.ordine;
 import com.myfoodstorage.pepefederico.progettoispw_2024.model.Prodotto;
 import com.myfoodstorage.pepefederico.progettoispw_2024.model.ProdottoFornito;
 import com.myfoodstorage.pepefederico.progettoispw_2024.model.ordine.stati.*;
-
 import java.time.LocalDate;
 import java.util.*;
 
 public class Ordine {
-    private final Stato creazione;
     private final Stato checkinOut;
     private final Stato accettato;
     private final Stato rifiutato;
@@ -23,7 +21,7 @@ public class Ordine {
     private String statoCorrente;
 
     public Ordine() {
-        this.creazione = new Creazione(this);
+        Stato creazione = new Creazione(this);
         this.checkinOut = new CheckingOut(this);
         this.attesa = new Attesa(this);
         this.accettato = new Accettato(this);
@@ -36,7 +34,7 @@ public class Ordine {
         this.stato = nuovoStato;
     }
 
-    public void creaOrdine(ArrayList<Prodotto> prodotti){
+    public void creaOrdine(List<Prodotto> prodotti){
         this.stato.creaOrdine(prodotti);
     }
 

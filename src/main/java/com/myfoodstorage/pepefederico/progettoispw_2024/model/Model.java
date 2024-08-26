@@ -2,12 +2,13 @@ package com.myfoodstorage.pepefederico.progettoispw_2024.model;
 
 import com.myfoodstorage.pepefederico.progettoispw_2024.factory.ViewFactory;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Model {
     private final ViewFactory viewFactory;
     private static Model model;
-    private final ArrayList<Sessione> sessioniUtentiRistoratori = new ArrayList<>();
-    private final ArrayList<Sessione> sessioniUtentiFornitori = new ArrayList<>();
+    private final List<Sessione> sessioniUtentiRistoratori = new ArrayList<>();
+    private final List<Sessione> sessioniUtentiFornitori = new ArrayList<>();
 
     private Model(){
         this.viewFactory = new ViewFactory();
@@ -31,7 +32,7 @@ public class Model {
     public void removeSessioneUtenteRistoratore(int sessionID){
         sessioniUtentiRistoratori.removeIf(sessione -> sessione.getIdSessione() == sessionID);
     }
-    public ArrayList<Sessione> getSessioniUtentiRistoratori() {
+    public List<Sessione> getSessioniUtentiRistoratori() {
         return sessioniUtentiRistoratori;
     }
 
@@ -41,7 +42,7 @@ public class Model {
     public void addSessioneUtenteFornitore(Sessione sessione) {
         this.sessioniUtentiFornitori.add(sessione);
     }
-    public ArrayList<Sessione> getSessioniUtentiFornitori() {
+    public List<Sessione> getSessioniUtentiFornitori() {
         return sessioniUtentiFornitori;
     }
 }

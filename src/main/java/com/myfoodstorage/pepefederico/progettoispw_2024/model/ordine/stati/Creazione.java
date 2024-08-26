@@ -4,7 +4,6 @@ import com.myfoodstorage.pepefederico.progettoispw_2024.model.Prodotto;
 import com.myfoodstorage.pepefederico.progettoispw_2024.model.ProdottoFornito;
 import com.myfoodstorage.pepefederico.progettoispw_2024.model.ordine.Ordine;
 import com.myfoodstorage.pepefederico.progettoispw_2024.model.ordine.Stato;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -21,7 +20,7 @@ public class Creazione implements Stato {
     }
 
     @Override
-    public void creaOrdine(ArrayList<Prodotto> prodotti) {
+    public void creaOrdine(List<Prodotto> prodotti) {
         for (Prodotto prodotto : prodotti) {
             ordine.getProdottiSelezionati().add(prodotto);
         }
