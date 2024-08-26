@@ -33,13 +33,7 @@ public class ItemCarrelloOrdineController {
     private void rimuoviProdotto(){
         OrdineBean ordineBean = ClientController.getInstance().getOrdineBean();
 
-        for(int i = 0; i < ordineBean.getProdotti().size(); i++){
-            if(nomeProdotto.getText().equals(ordineBean.getProdotti().get(i).getNomeProdotto())){
-                ordineBean.getProdotti().remove(i);
-                i--;
-            }
-        }
-
+        ordineBean.getProdotti().removeIf(prodottoOrdineBean -> nomeProdotto.getText().equals(prodottoOrdineBean.getNomeProdotto()));
         alertMessage("Hai rimosso il prodotto dall'ordine");
     }
 

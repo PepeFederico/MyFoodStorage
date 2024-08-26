@@ -125,5 +125,4 @@ public class ClientController implements Initializable {
     public void backToStatoOrdiniView(){
         clientParent.setCenter(Model.getInstance().getViewFactory().getVisualizzaOrdiniView());
     }
-
 }
