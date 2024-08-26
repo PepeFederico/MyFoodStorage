@@ -96,8 +96,7 @@ public class OrdineProdottiControllerA {
             retry++;
 
             OrdineDao ordineDao = new OrdineDao();
-            if(ordineDao.eliminaUltimoOrdine())
-                if(retry == MAX_RETRY) procediOrdine(ordineBean);
+            if(ordineDao.eliminaUltimoOrdine() && retry == MAX_RETRY) procediOrdine(ordineBean);
 
             throw new FailSendMail("Non è stato possibile inoltrare l'email al Fornitore. Controlla che il tuo PC sia correttamente collegato alla rete.");
         }
