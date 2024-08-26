@@ -15,14 +15,18 @@ import com.myfoodstorage.pepefederico.progettoispw_2024.model.ordine.Ordine;
 import javax.mail.MessagingException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.RejectedExecutionException;
 
 public class OrdineProdottiControllerA {
     private final SessioneBean sessioneBean;
     private List<ProdottoBean> prodBean = new ArrayList<>();
     private OrdineBean ordineBean;
     private final List<OrdineBean> ordiniEffetuati;
-    private int retry = 0;
+
+    private int retrySendMail = 0;
+    private int retryReadOrder = 0;
     private static final int MAX_RETRY = 1;
+
     public OrdineProdottiControllerA(SessioneBean sessioneBean) {
         this.sessioneBean = sessioneBean;
         this.ordiniEffetuati = new ArrayList<>();
@@ -93,16 +97,16 @@ public class OrdineProdottiControllerA {
             sendMailFunction(ordineBean);
 
         }catch (FailSendMail e){
-            retry++;
+            retrySendMail++;
 
             OrdineDao ordineDao = new OrdineDao();
-            if(ordineDao.eliminaUltimoOrdine() && retry == MAX_RETRY) procediOrdine(ordineBean);
+            if(ordineDao.eliminaUltimoOrdine() && retrySendMail == MAX_RETRY) procediOrdine(ordineBean);
 
             throw new FailSendMail("Non è stato possibile inoltrare l'email al Fornitore. Controlla che il tuo PC sia correttamente collegato alla rete.");
         }
     }
 
-    public void recuperaOrdini() throws ZeroOrderException {
+    public void recuperaOrdini() throws ZeroOrderException, RejectedExecutionException {
         try {
             OrdineDao ordineDAO = new OrdineDao();
             ordineDAO.recuperaInfoOrdini();
@@ -126,6 +130,11 @@ public class OrdineProdottiControllerA {
             }
         } catch (ZeroOrderException e){
             throw new ZeroOrderException(e.getMessage());
+        } catch (RejectedExecutionException e){
+            retryReadOrder++;
+            if(retryReadOrder == MAX_RETRY) recuperaOrdini();
+
+            throw new RejectedExecutionException(e.getMessage());
         }
     }
 

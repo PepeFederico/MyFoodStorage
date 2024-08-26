@@ -34,24 +34,28 @@ public class OrdineDao {
         }
     }
 
-    public void recuperaInfoOrdini() throws ZeroOrderException {
+    public void recuperaInfoOrdini() throws ZeroOrderException, RejectedExecutionException {
         setDirectoryName();
         countFile();
 
-        if(this.countOrdini == 0)
-            throw new ZeroOrderException("Non hai effettuato nessun ordine !!");
+        try {
 
-        ordine = new ArrayList<>();
-        for(int i = 0; i < this.countOrdini; i++){
-            ordine.add(OrdineFactory.getInstance().getOrdine());
-            letturaStatoOrdine(i);
+            if (this.countOrdini == 0)
+                throw new ZeroOrderException("Non hai effettuato nessun ordine !!");
 
-            ordine.get(i).setNomeFornitore(letturaFornitore(i));
-            letturaOrdine(i);
+            ordine = new ArrayList<>();
+            for (int i = 0; i < this.countOrdini; i++) {
+                ordine.add(OrdineFactory.getInstance().getOrdine());
+                letturaStatoOrdine(i);
 
-            ordine.get(i).creaOrdine(listaOrdine);
+                ordine.get(i).setNomeFornitore(letturaFornitore(i));
+                letturaOrdine(i);
+
+                ordine.get(i).creaOrdine(listaOrdine);
+            }
+        }catch (RejectedExecutionException e){
+            throw new ZeroOrderException(e.getMessage());
         }
-
     }
 
     public boolean eliminaUltimoOrdine(){
@@ -65,7 +69,7 @@ public class OrdineDao {
         return file.delete();
     }
 
-    private void letturaStatoOrdine(int i){
+    private void letturaStatoOrdine(int i) throws RejectedExecutionException{
         String nomeOrdineFile = directoryName + "\\" + "ordine_" + i +".txt";
         try{
             FileReader file = new FileReader(nomeOrdineFile);
