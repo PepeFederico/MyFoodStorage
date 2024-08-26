@@ -10,10 +10,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 public class CategoriaDao {
-    private final ArrayList<Categoria> categoria = new ArrayList<>();
+    private final List<Categoria> categoria = new ArrayList<>();
 
     public void recuperoCategorie(String nomeAttivita, String nomeDispensa) throws CategoryNotFoundException{
         Connection connection = ConnectionFactory.getConnection();
@@ -41,7 +42,7 @@ public class CategoriaDao {
         }
 
     }
-    public ArrayList<Categoria> getCategoria() {
+    public List<Categoria> getCategoria() {
         return categoria;
     }
 }

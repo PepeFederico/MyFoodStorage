@@ -1,9 +1,9 @@
 package com.myfoodstorage.pepefederico.progettoispw_2024.model;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class DispenseUtente {
-    private ArrayList<Dispensa> dispense;
+    private List<Dispensa> dispense;
     private static DispenseUtente dispenseUtente = null;
 
     private DispenseUtente(){
@@ -21,10 +21,10 @@ public class DispenseUtente {
         this.dispense = null;
         setDispenseUtente();
     }
-    public ArrayList<Dispensa> getDispense() {
+    public List<Dispensa> getDispense() {
         return dispense;
     }
-    public void setDispense(ArrayList<Dispensa> dispense) {
+    public void setDispense(List<Dispensa> dispense) {
         this.dispense = dispense;
     }
     private static synchronized void setDispenseUtente(){

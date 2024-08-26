@@ -14,10 +14,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 public class ProdottoDao {
-    private final ArrayList<Prodotto> prodotti = new ArrayList<>();
+    private final List<Prodotto> prodotti = new ArrayList<>();
 
     public void recuperoProdotti(String nomeAttivita, String nomeCategoria, String nomeDispensa) throws ProductNotFoundException, SearchException {
         try {
@@ -66,7 +67,7 @@ public class ProdottoDao {
         return rs;
     }
 
-    public ArrayList<Prodotto> getProdotti() {
+    public List<Prodotto> getProdotti() {
         return prodotti;
     }
 }

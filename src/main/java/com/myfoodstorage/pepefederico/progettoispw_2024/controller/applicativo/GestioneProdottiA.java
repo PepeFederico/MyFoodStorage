@@ -23,9 +23,9 @@ public class GestioneProdottiA {
     private static final String ACTION = "Context error";
     private final Logger logger = Logger.getLogger(GestioneProdottiA.class.getName());
     private final SessioneBean sessioneBean;
-    private final ArrayList<DispensaBean> dispBean = new ArrayList<>();
-    private final ArrayList<CategoriaBean> catBean = new ArrayList<>();
-    private final ArrayList<ProdottoBean> prodBean = new ArrayList<>();
+    private final List<DispensaBean> dispBean = new ArrayList<>();
+    private final List<CategoriaBean> catBean = new ArrayList<>();
+    private final List<ProdottoBean> prodBean = new ArrayList<>();
 
     public GestioneProdottiA(SessioneBean sessioneBean) {
         this.sessioneBean = sessioneBean;
@@ -45,7 +45,7 @@ public class GestioneProdottiA {
             if(DispenseUtente.getInstance().getDispense() == null){
                 DispensaDao dispensaDAO = new DispensaDao();
                 dispensaDAO.recuperoDispensa(sessioneBean.getUtente().getNomeAttivita());
-                ArrayList<Dispensa> disp = dispensaDAO.getDispensa();
+                List<Dispensa> disp = dispensaDAO.getDispensa();
                 DispenseUtente.getInstance().setDispense(disp);
             }
             infoToDashboardController(DispenseUtente.getInstance().getDispense());
@@ -65,7 +65,7 @@ public class GestioneProdottiA {
                     if(DispenseUtente.getInstance().getDispense().get(i).getCategorie() == null){
                         CategoriaDao categoriaDAO = new CategoriaDao();
                         categoriaDAO.recuperoCategorie(sessioneBean.getUtente().getNomeAttivita(), dispensaSelezionata);
-                        ArrayList<Categoria> categorias = categoriaDAO.getCategoria();
+                        List<Categoria> categorias = categoriaDAO.getCategoria();
                         DispenseUtente.getInstance().getDispense().get(i).setCategorie(categorias);
                     }
                     infoToCategoriaController(DispenseUtente.getInstance().getDispense().get(i).getCategorie());
@@ -91,7 +91,7 @@ public class GestioneProdottiA {
             if(Objects.requireNonNull(categoria).getProdotti() == null){
                 ProdottoDao prodottoDAO = new ProdottoDao();
                 prodottoDAO.recuperoProdotti(sessioneBean.getUtente().getNomeAttivita(), categoriaSelezionata, dispensaSelezionata);
-                ArrayList<Prodotto> prodotti = prodottoDAO.getProdotti();
+                List<Prodotto> prodotti = prodottoDAO.getProdotti();
                 DispenseUtente.getInstance().getDispense().get(i).getCategorie().get(j).setProdotti(prodotti);
             }
             infoToProdottiController(DispenseUtente.getInstance().getDispense().get(i).getCategorie().get(j).getProdotti());
@@ -107,7 +107,7 @@ public class GestioneProdottiA {
         try{
             ProdottoDao prodottoDAO = new ProdottoDao();
             prodottoDAO.recuperoProdotti(sessioneBean.getUtente().getNomeAttivita(), categoriaBean.getNomeCategoria() ,dispensaBean.getNomeDispensa());
-            ArrayList<Prodotto> prodotti = prodottoDAO.getProdotti();
+            List<Prodotto> prodotti = prodottoDAO.getProdotti();
             for (Prodotto prodotto : prodotti) {
                 ProdottoBean prodottobean = new ProdottoBean(
                         prodotto.getNomeProdotto(),
@@ -139,19 +139,19 @@ public class GestioneProdottiA {
     public List<ProdottoBean> getProdBean() {
         return prodBean;
     }
-    private void infoToDashboardController(ArrayList<Dispensa> d){
+    private void infoToDashboardController(List<Dispensa> d){
         for(Dispensa dispensa : d){
             DispensaBean dispensabean = new DispensaBean(dispensa.getNomeDispensa());
             dispBean.add(dispensabean);
         }
     }
-    private void infoToCategoriaController(ArrayList<Categoria> c){
+    private void infoToCategoriaController(List<Categoria> c){
         for (Categoria categoria : c) {
             CategoriaBean categoriabean = new CategoriaBean(categoria.getNomeCategoria());
             catBean.add(categoriabean);
         }
     }
-    private void infoToProdottiController(ArrayList<Prodotto> p){
+    private void infoToProdottiController(List<Prodotto> p){
         for (Prodotto prodotto : p) {
             ProdottoBean prodottobean = new ProdottoBean(
                     prodotto.getNomeProdotto(),

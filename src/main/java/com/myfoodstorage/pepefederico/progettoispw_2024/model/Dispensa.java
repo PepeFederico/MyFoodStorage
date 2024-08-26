@@ -1,11 +1,11 @@
 package com.myfoodstorage.pepefederico.progettoispw_2024.model;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class Dispensa {
     private String nomeDispensa;
     private int numeroCategorie;
-    private ArrayList<Categoria> categorie;
+    private List<Categoria> categorie;
 
     public Dispensa(String nomeDispensa, int numeroCategorie) {
         this.nomeDispensa = nomeDispensa;
@@ -13,10 +13,10 @@ public class Dispensa {
         this.categorie = null;
     }
 
-    public ArrayList<Categoria> getCategorie() {
+    public List<Categoria> getCategorie() {
         return categorie;
     }
-    public void setCategorie(ArrayList<Categoria> categorie) {
+    public void setCategorie(List<Categoria> categorie) {
         this.categorie = categorie;
     }
     public String getNomeDispensa() {
