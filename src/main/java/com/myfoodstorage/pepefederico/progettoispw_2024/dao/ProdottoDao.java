@@ -33,7 +33,7 @@ public class ProdottoDao {
                                     rs.getInt("taglia"),
                                     rs.getInt("numeroScorte"),
                                     rs.getDouble("costo"),
-                                    TipoAnimale.valueOf(rs.getString("TipoAnimale"))));
+                                    TipoAnimale.valueOf(rs.getString("TipoAnimale").toUpperCase())));
                 }while(rs.next());
             }else{
                 throw new ProductNotFoundException("Ops, come è vuota la tua dispensa. Inserisci qualche prodotto");

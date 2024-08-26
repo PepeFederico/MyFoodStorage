@@ -10,19 +10,19 @@ public class SetIconProdotti {
         switch (string){
             case "Carne":
                 switch (tipoAnimale) {
-                    case Manzo:
+                    case MANZO:
                         icona.setImage(new Image(String.valueOf(getClass().getResource("/image/imageProdotti/cow.png"))));
                         break;
-                    case Vitella:
+                    case VITELLA:
                         icona.setImage(new Image(String.valueOf(getClass().getResource("/image/imageProdotti/dinosaur.png"))));
                         break;
-                    case Maiale:
+                    case MAIALE:
                         icona.setImage(new Image(String.valueOf(getClass().getResource("/image/imageProdotti/pig.png"))));
                         break;
-                    case Pollo:
+                    case POLLO:
                         icona.setImage(new Image(String.valueOf(getClass().getResource("/image/imageProdotti/hen.png"))));
                         break;
-                    case Tacchino:
+                    case TACCHINO:
                         icona.setImage(new Image(String.valueOf(getClass().getResource("/image/imageProdotti/turkey.png"))));
                         break;
                     default:
@@ -32,11 +32,11 @@ public class SetIconProdotti {
 
             case "Pesce":
                 switch (tipoAnimale) {
-                    case Salmone:
+                    case SALMONE:
                         icona.setImage(new Image(String.valueOf(getClass().getResource("/image/imageProdotti/fish.png"))));
                         break;
 
-                    case Tonno:
+                    case TONNO:
                         icona.setImage(new Image(String.valueOf(getClass().getResource("/image/imageProdotti/tuna.png"))));
                         break;
 
