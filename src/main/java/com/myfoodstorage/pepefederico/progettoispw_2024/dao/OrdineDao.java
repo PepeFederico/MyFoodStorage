@@ -54,6 +54,17 @@ public class OrdineDao {
 
     }
 
+    public boolean eliminaUltimoOrdine(){
+        setDirectoryName();
+        countFile();
+        int ultimoFile = countOrdini - 1;
+
+        String nomeOrdineFile = directoryName + "\\" + "ordine_" + ultimoFile +".txt";
+        File file = new File(nomeOrdineFile);
+
+        return file.delete();
+    }
+
     private void letturaStatoOrdine(int i){
         String nomeOrdineFile = directoryName + "\\" + "ordine_" + i +".txt";
         try{

@@ -52,8 +52,11 @@ public class SimpleMail {
         Message message = prepareMessage(session, myAccountEmail, ordineBean.getContattoFornitore(), ordineBean);
         if (message != null) {
             Transport.send(message);
-            fileOrdine.eliminaFile();
         }
+    }
+
+    public void eliminaFile(){
+        fileOrdine.eliminaFile();
     }
 
     private Message prepareMessage(

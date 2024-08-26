@@ -24,7 +24,7 @@
             </ImageView>
          </graphic>
       </Button>
-    <ScrollPane fx:id="scrollPane" prefHeight="740.0" prefWidth="800.0" style="-fx-background-color: #FFFFFF;">
+    <ScrollPane prefHeight="740.0" prefWidth="800.0" style="-fx-background-color: #FFFFFF;">
       <GridPane fx:id="gridPane">
         <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />

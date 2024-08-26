@@ -17,7 +17,7 @@
             fx:controller="com.myfoodstorage.pepefederico.progettoispw_2024.controller.grafico.DashboardController">
 
   <VBox prefHeight="800.0" prefWidth="800.0" styleClass="menu_container" stylesheets="@../../../../../style/dashboard.css">
-    <ScrollPane fx:id="scrollPane" prefHeight="740.0" prefWidth="800.0" style="-fx-background-color: #FFFFFF;">
+    <ScrollPane prefHeight="740.0" prefWidth="800.0" style="-fx-background-color: #FFFFFF;">
       <GridPane fx:id="gridPane">
         <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />

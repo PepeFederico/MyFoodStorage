@@ -21,7 +21,8 @@ public class OrdineProdottiControllerA {
     private List<ProdottoBean> prodBean = new ArrayList<>();
     private OrdineBean ordineBean;
     private final List<OrdineBean> ordiniEffetuati;
-
+    private int retry = 0;
+    private static final int MAX_RETRY = 1;
     public OrdineProdottiControllerA(SessioneBean sessioneBean) {
         this.sessioneBean = sessioneBean;
         this.ordiniEffetuati = new ArrayList<>();
@@ -62,13 +63,13 @@ public class OrdineProdottiControllerA {
     }
 
     public void procediOrdine(OrdineBean ordineBean) throws FailSendMail {
-       try {
+        try {
             setOrdineBean(ordineBean);
             String nomeAttivita = ClientController.getInstance().getSessioneUtente().getUtente().getNomeAttivita();
             Ordine ordineProdotti = OrdineFactory.getInstance().getOrdine();
 
             ArrayList<Prodotto> prodotti = new ArrayList<>();
-            for(int i = 0; i < ordineBean.getProdotti().size(); i++){
+            for (int i = 0; i < ordineBean.getProdotti().size(); i++) {
                 prodotti.add(ProdottoFactory.getInstance().getProdotto(
                         ordineBean.getProdotti().get(i).getNomeProdotto(),
                         ordineBean.getProdotti().get(i).getQtaRichiesta(),
@@ -76,8 +77,8 @@ public class OrdineProdottiControllerA {
             }
             ordineProdotti.creaOrdine(prodotti);
 
-           List<ProdottoFornito> prodottiForniti = ordineProdotti.elaboraOrdine(nomeAttivita);
-            for(int i = 0; i < ordineBean.getProdotti().size(); i++){
+            List<ProdottoFornito> prodottiForniti = ordineProdotti.elaboraOrdine(nomeAttivita);
+            for (int i = 0; i < ordineBean.getProdotti().size(); i++) {
                 for (ProdottoFornito prodottoFornito : prodottiForniti) {
                     if (ordineBean.getProdotti().get(i).getNomeProdotto().equals(prodottoFornito.getNomeProdotto())) {
                         ordineProdotti.setContattoFornitore(prodottoFornito.getContattoFornitore());
@@ -89,13 +90,17 @@ public class OrdineProdottiControllerA {
             ordineBean.setContattoFornitore(ordineProdotti.getContattoFornitore());
             ordineBean.setNomeFornitore(ordineProdotti.getNomeFornitore());
 
-            SimpleMail simpleMail = new SimpleMail();
-            simpleMail.sendMail(ordineBean);
+            sendMailFunction(ordineBean);
 
-       }
-       catch (MessagingException e) {
-           throw new FailSendMail("Qualcosa e' andato storto. Riprova più tardi !!");
-       }
+        }catch (FailSendMail e){
+            retry++;
+
+            OrdineDao ordineDao = new OrdineDao();
+            if(ordineDao.eliminaUltimoOrdine())
+                if(retry == MAX_RETRY) procediOrdine(ordineBean);
+
+            throw new FailSendMail("Non è stato possibile inoltrare l'email al Fornitore. Controlla che il tuo PC sia correttamente collegato alla rete.");
+        }
     }
 
     public void recuperaOrdini() throws ZeroOrderException {
@@ -136,6 +141,20 @@ public class OrdineProdottiControllerA {
                 tipoAnimale,
                 qtaRichiesta
         );
+    }
+
+    private void sendMailFunction(OrdineBean ordineBean) throws FailSendMail {
+        SimpleMail simpleMail = new SimpleMail();
+
+        try {
+            simpleMail.sendMail(ordineBean);
+        }
+        catch (MessagingException e) {
+            throw new FailSendMail("Qualcosa e' andato storto. Riprova più tardi !!");
+        }
+        finally {
+            simpleMail.eliminaFile();
+        }
     }
 
     public void setProdBean(List<ProdottoBean> prodBean) {

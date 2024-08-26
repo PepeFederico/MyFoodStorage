@@ -12,7 +12,6 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import java.io.IOException;
@@ -28,8 +27,6 @@ public class VisualizzaOrdineController implements Initializable {
     private GridPane gridPane;
     @FXML
     private Button procediOrdine;
-    @FXML
-    private ScrollPane scrollPane;
     @FXML
     private Button aggiornaGrafica;
     OrdineBean ordineBean;
@@ -51,12 +48,16 @@ public class VisualizzaOrdineController implements Initializable {
         try {
             if (!ordineBean.getProdotti().isEmpty()) {
                 ordineProdotti = new OrdineProdottiControllerA(ClientController.getInstance().getSessioneUtente());
-                if (ordineProdotti.checkSessione()) ordineProdotti.procediOrdine(ordineBean);
+                if (ordineProdotti.checkSessione()) {
+                    ordineProdotti.procediOrdine(ordineBean);
+                    alertMessage("Ordine inoltrato al Fornitore con successo !!");
+                    backToRicercaProdotti();
+                }
             } else {
                 alertMessage("L'ordine è vuoto !! Inserisci almeno un prodotto");
+                onBackView();
             }
-            alertMessage("Ordine inoltrato al Fornitore con successo !!");
-            backToRicercaProdotti();
+
         }catch (FailSendMail e){
             alertErrorMessage(e.getMessage());
             backToRicercaProdotti();
