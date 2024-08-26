@@ -11,13 +11,11 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
-
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -28,12 +26,10 @@ public class CategoriaController implements Initializable {
     @FXML
     private Button nuovaCategoria;
     @FXML
-    private ScrollPane scrollPane;
-    @FXML
     private Button backView;
     private static final String ACTION = "Context error";
     private final Logger logger = Logger.getLogger(CategoriaController.class.getName());
-    private ArrayList<CategoriaBean> categoria;
+    private List<CategoriaBean> categoria;
 
 
     @Override

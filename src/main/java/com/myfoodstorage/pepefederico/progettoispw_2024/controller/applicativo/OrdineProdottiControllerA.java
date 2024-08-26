@@ -138,7 +138,7 @@ public class OrdineProdottiControllerA {
         );
     }
 
-    public void setProdBean(ArrayList<ProdottoBean> prodBean) {
+    public void setProdBean(List<ProdottoBean> prodBean) {
         this.prodBean = prodBean;
     }
 

@@ -14,6 +14,8 @@ import com.myfoodstorage.pepefederico.progettoispw_2024.exceptions.SearchExcepti
 import com.myfoodstorage.pepefederico.progettoispw_2024.model.*;
 import com.myfoodstorage.pepefederico.progettoispw_2024.dao.DispensaDao;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -83,10 +85,10 @@ public class GestioneProdottiA {
 
             Dispensa dispensa = searchDispensa(dispensaSelezionata);
             int i = DispenseUtente.getInstance().getDispense().indexOf(dispensa);
-            Categoria categoria = searchCategoria(categoriaSelezionata,dispensa);
+            Categoria categoria = searchCategoria(categoriaSelezionata, Objects.requireNonNull(dispensa));
             int j = DispenseUtente.getInstance().getDispense().get(i).getCategorie().indexOf(categoria);
 
-            if(categoria.getProdotti() == null){
+            if(Objects.requireNonNull(categoria).getProdotti() == null){
                 ProdottoDao prodottoDAO = new ProdottoDao();
                 prodottoDAO.recuperoProdotti(sessioneBean.getUtente().getNomeAttivita(), categoriaSelezionata, dispensaSelezionata);
                 ArrayList<Prodotto> prodotti = prodottoDAO.getProdotti();
@@ -128,13 +130,13 @@ public class GestioneProdottiA {
         }
     }
 
-    public ArrayList<CategoriaBean> getCatBean() {
+    public List<CategoriaBean> getCatBean() {
         return catBean;
     }
-    public ArrayList<DispensaBean> getDispBean() {
+    public List<DispensaBean> getDispBean() {
         return dispBean;
     }
-    public ArrayList<ProdottoBean> getProdBean() {
+    public List<ProdottoBean> getProdBean() {
         return prodBean;
     }
     private void infoToDashboardController(ArrayList<Dispensa> d){

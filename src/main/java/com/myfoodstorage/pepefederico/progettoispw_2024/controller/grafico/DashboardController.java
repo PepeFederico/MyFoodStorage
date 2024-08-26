@@ -9,12 +9,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.control.Alert;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,11 +21,9 @@ import java.util.logging.Logger;
 public class DashboardController implements Initializable {
     @FXML
     private GridPane gridPane;
-    @FXML
-    private ScrollPane scrollPane;
     private static final String ACTION = "Context error";
     private final Logger logger = Logger.getLogger(DashboardController.class.getName());
-    private ArrayList<DispensaBean> dispensa;
+    private List<DispensaBean> dispensa;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
