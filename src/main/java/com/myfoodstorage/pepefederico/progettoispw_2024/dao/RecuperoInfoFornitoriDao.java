@@ -40,7 +40,7 @@ public class RecuperoInfoFornitoriDao {
                             rs.getString("Fornitore"),
                             rs.getString("contattoFornitore"),
                             rs.getString("nome"),
-                            TipoAnimale.valueOf(rs.getString("TipoAnimale")),
+                            TipoAnimale.valueOf(rs.getString("TipoAnimale").toUpperCase()),
                             rs.getInt("taglia"),
                             rs.getDouble("costo")));
                 }while(rs.next());

@@ -3,10 +3,7 @@ package com.myfoodstorage.pepefederico.progettoispw_2024.controller.applicativo;
 import com.myfoodstorage.pepefederico.progettoispw_2024.dao.UtenteDao;
 import com.myfoodstorage.pepefederico.progettoispw_2024.exceptions.UserNotFoundException;
 import com.myfoodstorage.pepefederico.progettoispw_2024.bean.UtenteLoginBean;
-import com.myfoodstorage.pepefederico.progettoispw_2024.model.DispenseUtente;
-import com.myfoodstorage.pepefederico.progettoispw_2024.model.Model;
-import com.myfoodstorage.pepefederico.progettoispw_2024.model.Sessione;
-import com.myfoodstorage.pepefederico.progettoispw_2024.model.Utente;
+import com.myfoodstorage.pepefederico.progettoispw_2024.model.*;
 import com.myfoodstorage.pepefederico.progettoispw_2024.bean.SessioneBean;
 import com.myfoodstorage.pepefederico.progettoispw_2024.bean.UtenteBean;
 
@@ -29,10 +26,10 @@ public class LoginControllerA {
             Utente utenteLoggato = utenteDAO.getUtenteLoggato();
             Sessione sessioneUtente = com.myfoodstorage.pepefederico.progettoispw_2024.factory.SessionFactory.getInstance().getSessione(utenteLoggato);
 
-            fillUtenteBean(utenteLoggato);
             SessioneBean sessioneBean = new SessioneBean(sessioneUtente.getIdSessione(), sessioneUtente.getData(), utenteBean, sessioneUtente.isStatusSessione());
 
             if(utenteLoggato.getTipoUtente().equals("Ristoratore")){
+                fillUtenteBean((Ristoratore) utenteLoggato);
                 Model.getInstance().addSessioneUtenteRistoratore(sessioneUtente);
                 Model.getInstance().getViewFactory().showRistoratoreWindow(sessioneBean);
             }
@@ -45,7 +42,7 @@ public class LoginControllerA {
         Model.getInstance().removeSessioneUtenteRistoratore(sessione.getIdSessione());
         DispenseUtente.getInstance().setLogoutDispenseUtente();
     }
-    private void fillUtenteBean(Utente utente){
+    private void fillUtenteBean(Ristoratore utente){
         utenteBean.setNome(utente.getNome());
         utenteBean.setCognome(utente.getCognome());
         utenteBean.setEmail(utente.getEmail());

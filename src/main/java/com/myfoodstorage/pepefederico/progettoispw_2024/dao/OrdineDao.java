@@ -122,7 +122,7 @@ public class OrdineDao {
                             break;
 
                         case 1:
-                            prodotto.setTipoAnimale(TipoAnimale.valueOf(token));
+                            prodotto.setTipoAnimale(TipoAnimale.valueOf(token.toUpperCase()));
                             break;
 
                         default:
