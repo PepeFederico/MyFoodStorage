@@ -1,4 +1,4 @@
-package com.myfoodstorage.pepefederico.progettoispw_2024.secondaGUI;
+package com.myfoodstorage.pepefederico.progettoispw_2024.secondaGui;
 
 import com.myfoodstorage.pepefederico.progettoispw_2024.bean.UtenteLoginBean;
 import com.myfoodstorage.pepefederico.progettoispw_2024.controller.applicativo.LoginControllerA;
@@ -6,6 +6,7 @@ import com.myfoodstorage.pepefederico.progettoispw_2024.exceptions.UserNotFoundE
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.concurrent.RejectedExecutionException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -30,16 +31,10 @@ public class LoginControllerCLI {
 
                 if ((!email.isEmpty() && !password.isEmpty())) {
                     if (utente.mailSyntaxCheck(email)) {
-                        try {
-                            utente.setEmail(email);
-                            utente.setPassword(password);
-                            LoginControllerA controller = new LoginControllerA(utente);
-                            controller.autenticazioneUtenteCLI();
-
-                        } catch (UserNotFoundException e) {
-                            logger.log(Level.WARNING, e.getMessage());
-                            setErrore();
-                        }
+                        utente.setEmail(email);
+                        utente.setPassword(password);
+                        LoginControllerA controller = new LoginControllerA(utente);
+                        controller.autenticazioneUtenteCLI();
                     } else {
                         logger.log(Level.WARNING, "Email non conforme. Riprova!!");
                         setErrore();
@@ -50,7 +45,10 @@ public class LoginControllerCLI {
                 }
 
             } catch (IOException e) {
-                throw new RuntimeException(e);
+                throw new RejectedExecutionException(e);
+            } catch (UserNotFoundException e) {
+                logger.log(Level.WARNING, e.getMessage());
+                setErrore();
             }
 
         }while(errore);
