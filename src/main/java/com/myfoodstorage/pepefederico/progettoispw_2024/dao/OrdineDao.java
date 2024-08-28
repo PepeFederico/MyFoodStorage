@@ -154,12 +154,12 @@ public class OrdineDao {
         }
     }
 
-    private BufferedWriter getBufferedWriter(Ordine ordine, FileWriter fileOrdine, String stato, String noneFornitore) throws IOException {
+    private BufferedWriter getBufferedWriter(Ordine ordine, FileWriter fileOrdine, String stato, String nomeFornitore) throws IOException {
         BufferedWriter bufferedWriter = new BufferedWriter(fileOrdine);
 
         bufferedWriter.write(ordine.getDataOrdine() + " Stato: " + stato);
         bufferedWriter.newLine();
-        bufferedWriter.write("Verso: " + noneFornitore);
+        bufferedWriter.write("Verso: " + nomeFornitore);
         bufferedWriter.newLine();
 
         for (int i = 0; i < ordine.getProdottiSelezionati().size(); i++) {
