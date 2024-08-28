@@ -178,7 +178,11 @@ public class ViewFactory {
         this.categoriaView = null;
         this.ordineProdottiView = null;
         this.ricercaOrdineView = null;
+        this.visualizzaProdottiView = null;
+        this.visualizzaOrdiniView = null;
+        this.visualizzaProdottiOrdinatiView = null;
     }
+
     public void closeStage(Stage stage){
         stage.close();
     }

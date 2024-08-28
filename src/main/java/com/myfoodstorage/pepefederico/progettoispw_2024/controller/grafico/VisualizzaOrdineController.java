@@ -29,8 +29,7 @@ public class VisualizzaOrdineController implements Initializable {
     private Button procediOrdine;
     @FXML
     private Button aggiornaGrafica;
-    OrdineBean ordineBean;
-    OrdineProdottiControllerA ordineProdotti;
+    private OrdineBean ordineBean;
     private static final String ACTION = "Context error";
     private final Logger logger = Logger.getLogger(VisualizzaOrdineController.class.getName());
 
@@ -47,7 +46,7 @@ public class VisualizzaOrdineController implements Initializable {
     private void procediOrdine(){
         try {
             if (!ordineBean.getProdotti().isEmpty()) {
-                ordineProdotti = new OrdineProdottiControllerA(ClientController.getInstance().getSessioneUtente());
+                OrdineProdottiControllerA ordineProdotti = new OrdineProdottiControllerA(ClientController.getInstance().getSessioneUtente());
                 if (ordineProdotti.checkSessione()) {
                     ordineProdotti.procediOrdine(ordineBean);
                     alertMessage("Ordine inoltrato al Fornitore con successo !!");

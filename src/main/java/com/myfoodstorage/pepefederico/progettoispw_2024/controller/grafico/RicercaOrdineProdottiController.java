@@ -40,6 +40,7 @@ public class RicercaOrdineProdottiController implements Initializable {
                     categoriaBean.setNomeCategoria(categoriaInput.getText());
 
                     ordineProdottiControllerA.ricercaProdotti(dispensaBean, categoriaBean);
+                    ClientController.getInstance().setProdottiOrdine();
                 }else{
                     Alert alert = new Alert(Alert.AlertType.WARNING);
                     alert.setContentText("Attenzione!! non hai inserito alcuna informazione.");

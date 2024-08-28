@@ -11,6 +11,9 @@ public class LoginControllerA {
     private UtenteLoginBean utente;
     private UtenteDao utenteDAO;
     private UtenteBean utenteBean;
+    private Utente utenteLoggato;
+    private Sessione sessioneUtente;
+    private SessioneBean sessioneBean;
 
     public LoginControllerA(UtenteLoginBean utente) {
         this.utente = utente;
@@ -22,12 +25,7 @@ public class LoginControllerA {
 
     public void autenticazioneUtente() throws UserNotFoundException {
         try {
-            utenteDAO.verificaCredenziali(utente.getEmail(), utente.getPassword());
-            Utente utenteLoggato = utenteDAO.getUtenteLoggato();
-            Sessione sessioneUtente = com.myfoodstorage.pepefederico.progettoispw_2024.factory.SessionFactory.getInstance().getSessione(utenteLoggato);
-
-            fillUtenteBean(utenteLoggato);
-            SessioneBean sessioneBean = new SessioneBean(sessioneUtente.getIdSessione(), sessioneUtente.getData(), utenteBean, sessioneUtente.isStatusSessione());
+            ricercaUtente();
 
             if(utenteLoggato.getTipoUtente().equals("Ristoratore")){
                 Model.getInstance().addSessioneUtenteRistoratore(sessioneUtente);
@@ -38,10 +36,35 @@ public class LoginControllerA {
             throw new UserNotFoundException("Errore: Credenziali non valide");
         }
     }
+
+    public void autenticazioneUtenteCLI() throws UserNotFoundException {
+        try {
+            ricercaUtente();
+
+            if(utenteLoggato.getTipoUtente().equals("Ristoratore")){
+                Model.getInstance().addSessioneUtenteRistoratore(sessioneUtente);
+                Model.getInstance().getViewFactoryCLI().showRistoratoreWindowCLI(sessioneBean);
+            }
+
+        } catch (UserNotFoundException unfe) {
+            throw new UserNotFoundException("Errore: Credenziali non valide");
+        }
+    }
+
     public void logout(SessioneBean sessione){
         Model.getInstance().removeSessioneUtenteRistoratore(sessione.getIdSessione());
         DispenseUtente.getInstance().setLogoutDispenseUtente();
     }
+
+    private void ricercaUtente() throws UserNotFoundException {
+        utenteDAO.verificaCredenziali(utente.getEmail(), utente.getPassword());
+        utenteLoggato = utenteDAO.getUtenteLoggato();
+        sessioneUtente = com.myfoodstorage.pepefederico.progettoispw_2024.factory.SessionFactory.getInstance().getSessione(utenteLoggato);
+
+        fillUtenteBean(utenteLoggato);
+        sessioneBean = new SessioneBean(sessioneUtente.getIdSessione(), sessioneUtente.getData(), utenteBean, sessioneUtente.isStatusSessione());
+    }
+
     private void fillUtenteBean(Utente utente){
         utenteBean.setNome(utente.getNome());
         utenteBean.setCognome(utente.getCognome());

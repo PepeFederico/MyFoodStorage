@@ -62,7 +62,6 @@ public class OrdineProdottiControllerA {
         ClientController.getInstance().setDispensaBean(dispensaBean);
         ClientController.getInstance().setCategoriaBean(categoriaBean);
         ClientController.getInstance().setProdottiBeans(prodBean);
-        ClientController.getInstance().setProdottiOrdine();
 
     }
 
