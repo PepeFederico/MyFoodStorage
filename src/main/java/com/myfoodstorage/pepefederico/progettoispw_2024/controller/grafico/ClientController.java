@@ -1,13 +1,23 @@
 package com.myfoodstorage.pepefederico.progettoispw_2024.controller.grafico;
+
 import com.myfoodstorage.pepefederico.progettoispw_2024.bean.*;
 import com.myfoodstorage.pepefederico.progettoispw_2024.controller.applicativo.LoginControllerA;
 import com.myfoodstorage.pepefederico.progettoispw_2024.model.Model;
+import com.myfoodstorage.pepefederico.progettoispw_2024.secondaGUI.DispensaControllerCLI;
+import com.myfoodstorage.pepefederico.progettoispw_2024.secondaGUI.OrdineRicercaControllerCLI;
+import com.myfoodstorage.pepefederico.progettoispw_2024.secondaGUI.ProfiloControllerCLI;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.concurrent.RejectedExecutionException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ClientController implements Initializable {
     public BorderPane clientParent;
@@ -17,6 +27,10 @@ public class ClientController implements Initializable {
     private OrdineBean ordineBean;
     private List<ProdottoBean> prodottiBeans;
     private static ClientController clientController;
+
+    private boolean nuovoInput;
+    private boolean errore;
+    private final Logger logger = Logger.getLogger(ClientController.class.getName());
 
     private ClientController() {}
 
@@ -57,6 +71,71 @@ public class ClientController implements Initializable {
                     clientParent.setCenter(Model.getInstance().getViewFactory().getDashboardView());
             }
         });
+    }
+
+    /**
+     * Metodo che implementa la seconda interfaccia grafica
+     */
+    public void inizialize(){
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        try {
+            do{
+                visualizzaGrafica();
+                int scelta = Integer.parseInt(reader.readLine());
+
+                errore = false;
+                nuovoInput = false;
+                switch (scelta){
+                    case 1:
+                        DispensaControllerCLI dispensaControllerCLI = new DispensaControllerCLI();
+                        dispensaControllerCLI.recuperoInfo();
+                        setNuovoInput();
+                        break;
+
+                    case 2:
+                        OrdineRicercaControllerCLI ordineRicercaControllerCLI = new OrdineRicercaControllerCLI();
+                        ordineRicercaControllerCLI.startOrdine();
+
+                        setNuovoInput();
+                        break;
+
+                    case 3:
+                        ProfiloControllerCLI profiloControllerCLI = new ProfiloControllerCLI();
+                        profiloControllerCLI.recuperoInfoProfilo();
+
+                        setNuovoInput();
+                        break;
+
+                    case 4:
+                        LoginControllerA loginControllerA = new LoginControllerA();
+                        loginControllerA.logout(sessioneUtente);
+                        break;
+
+                    default:
+                        logger.log(Level.WARNING, "Ops. Hai digitato un'opzione non valida, riprova ");
+                        setErrore();
+                }
+
+            }while(errore || nuovoInput);
+
+        } catch (IOException e) {
+            throw new RejectedExecutionException(e);
+        }
+    }
+
+    private void visualizzaGrafica(){
+        System.out.println("------Dashboard View------");
+        System.out.println("1) Visualizza Dispense");
+        System.out.println("2) Proponi Ordine");
+        System.out.println("3) Visualizza Profilo");
+        System.out.println("4) Logout");
+    }
+
+    private void setNuovoInput(){
+        this.nuovoInput = true;
+    }
+    private void setErrore(){
+        this.errore = true;
     }
 
     public void setSessioneUtente(SessioneBean sessioneUtente) {
