@@ -9,6 +9,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.List;
+import java.util.concurrent.RejectedExecutionException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -71,9 +72,9 @@ public class VisualizzaCarrello {
                         errore = true;
                 }
             } catch (IOException e) {
-                throw new RuntimeException(e);
+                throw new RejectedExecutionException(e);
             }
-        }while(nuovoInput | errore);
+        }while(nuovoInput || errore);
     }
 
     private void modificaQuantitaProdotto(){
@@ -98,7 +99,7 @@ public class VisualizzaCarrello {
             }
 
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RejectedExecutionException(e);
         }
     }
 
@@ -115,7 +116,7 @@ public class VisualizzaCarrello {
 
             ordineBean.getProdotti().removeIf(prodottoOrdineBean -> nomeProdotto.equals(prodottoOrdineBean.getNomeProdotto()));
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RejectedExecutionException(e);
         }
     }
 

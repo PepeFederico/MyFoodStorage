@@ -1,20 +1,20 @@
 package com.myfoodstorage.pepefederico.progettoispw_2024.model;
 
 import com.myfoodstorage.pepefederico.progettoispw_2024.factory.ViewFactory;
-import com.myfoodstorage.pepefederico.progettoispw_2024.factory.ViewFactoryCLI;
+import com.myfoodstorage.pepefederico.progettoispw_2024.factory.ViewFactoryCli;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Model {
     private final ViewFactory viewFactory;
-    private final ViewFactoryCLI viewFactoryCLI;
+    private final ViewFactoryCli viewFactoryCLI;
     private static Model model;
     private final List<Sessione> sessioniUtentiRistoratori = new ArrayList<>();
     private final List<Sessione> sessioniUtentiFornitori = new ArrayList<>();
 
     private Model(){
         this.viewFactory = new ViewFactory();
-        this.viewFactoryCLI = new ViewFactoryCLI();
+        this.viewFactoryCLI = new ViewFactoryCli();
     }
 
     public static synchronized Model getInstance(){
@@ -28,7 +28,7 @@ public class Model {
         return viewFactory;
     }
 
-    public ViewFactoryCLI getViewFactoryCLI(){
+    public ViewFactoryCli getViewFactoryCLI(){
         return viewFactoryCLI;
     }
 
