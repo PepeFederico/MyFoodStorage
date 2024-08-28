@@ -10,10 +10,10 @@ import java.util.concurrent.RejectedExecutionException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class visualizzaOrdini {
+public class VisualizzaOrdini {
 
     private List<OrdineBean> ordineBean;
-    private final Logger logger = Logger.getLogger(visualizzaOrdini.class.getName());
+    private final Logger logger = Logger.getLogger(VisualizzaOrdini.class.getName());
 
     public void visualizzaStatoOrdini(){
 
