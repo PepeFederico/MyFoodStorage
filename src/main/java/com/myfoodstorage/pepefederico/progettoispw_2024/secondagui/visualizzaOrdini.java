@@ -1,4 +1,4 @@
-package com.myfoodstorage.pepefederico.progettoispw_2024.secondaGui;
+package com.myfoodstorage.pepefederico.progettoispw_2024.secondagui;
 
 import com.myfoodstorage.pepefederico.progettoispw_2024.bean.OrdineBean;
 import com.myfoodstorage.pepefederico.progettoispw_2024.bean.ProdottoOrdineBean;
@@ -10,10 +10,10 @@ import java.util.concurrent.RejectedExecutionException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class visualizzaOrdiniCLI {
+public class visualizzaOrdini {
 
     private List<OrdineBean> ordineBean;
-    private final Logger logger = Logger.getLogger(visualizzaOrdiniCLI.class.getName());
+    private final Logger logger = Logger.getLogger(visualizzaOrdini.class.getName());
 
     public void visualizzaStatoOrdini(){
 

@@ -3,9 +3,9 @@ package com.myfoodstorage.pepefederico.progettoispw_2024.controller.grafico;
 import com.myfoodstorage.pepefederico.progettoispw_2024.bean.*;
 import com.myfoodstorage.pepefederico.progettoispw_2024.controller.applicativo.LoginControllerA;
 import com.myfoodstorage.pepefederico.progettoispw_2024.model.Model;
-import com.myfoodstorage.pepefederico.progettoispw_2024.secondaGui.DispensaControllerCLI;
-import com.myfoodstorage.pepefederico.progettoispw_2024.secondaGui.OrdineRicercaControllerCLI;
-import com.myfoodstorage.pepefederico.progettoispw_2024.secondaGui.ProfiloControllerCLI;
+import com.myfoodstorage.pepefederico.progettoispw_2024.secondagui.DispensaController;
+import com.myfoodstorage.pepefederico.progettoispw_2024.secondagui.OrdineRicercaController;
+import com.myfoodstorage.pepefederico.progettoispw_2024.secondagui.ProfiloController;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -87,21 +87,21 @@ public class ClientController implements Initializable {
                 nuovoInput = false;
                 switch (scelta){
                     case 1:
-                        DispensaControllerCLI dispensaControllerCLI = new DispensaControllerCLI();
-                        dispensaControllerCLI.recuperoInfo();
+                        DispensaController dispensaController = new DispensaController();
+                        dispensaController.recuperoInfo();
                         setNuovoInput();
                         break;
 
                     case 2:
-                        OrdineRicercaControllerCLI ordineRicercaControllerCLI = new OrdineRicercaControllerCLI();
-                        ordineRicercaControllerCLI.startOrdine();
+                        OrdineRicercaController ordineRicercaController = new OrdineRicercaController();
+                        ordineRicercaController.startOrdine();
 
                         setNuovoInput();
                         break;
 
                     case 3:
-                        ProfiloControllerCLI profiloControllerCLI = new ProfiloControllerCLI();
-                        profiloControllerCLI.recuperoInfoProfilo();
+                        ProfiloController profiloController = new ProfiloController();
+                        profiloController.recuperoInfoProfilo();
 
                         setNuovoInput();
                         break;

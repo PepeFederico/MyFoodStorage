@@ -1,4 +1,4 @@
-package com.myfoodstorage.pepefederico.progettoispw_2024.secondaGui;
+package com.myfoodstorage.pepefederico.progettoispw_2024.secondagui;
 
 import com.myfoodstorage.pepefederico.progettoispw_2024.bean.UtenteLoginBean;
 import com.myfoodstorage.pepefederico.progettoispw_2024.controller.applicativo.LoginControllerA;
@@ -10,9 +10,9 @@ import java.util.concurrent.RejectedExecutionException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class LoginControllerCLI {
+public class LoginController {
     private boolean errore = false;
-    private final Logger logger = Logger.getLogger(LoginControllerCLI.class.getName());
+    private final Logger logger = Logger.getLogger(LoginController.class.getName());
 
     public void loginUser() {
         UtenteLoginBean utente = new UtenteLoginBean();
